@@ -45,38 +45,6 @@ A continuación se listan los pasos para la preparación del servidor para entor
 
 El sistema puede ser instalado directamente dentro del sistema operativo cumpliendo con los requisitos de software listados en el [apartado 1](#1-software) o puede configurarse a través de docker.
 
-#### 1.1 Configuración de repositorios Debian
-
-Antes de comenzar con la instalación es necesario configurar los repositorios de los cuales se obtendrán los paquetes a instalar, cabe aclarar que si ya se posee repositorios configurados se puede omitir esta sección. Los pasos para la configuración de los repositorios son los siguientes:
-
-1. Abrir una terminal, identificarse como usuario root y editar el archivo sources.list que se encuentra dentro del directorio `/etc/apt/`:
-
-```bash
-vim /etc/apt/sources.list # alternativa a vim: nano
-```
-
-2. Agregar los repositorios que se listan a continuación:
-
-```bash
-##Repositorios del MINSAL para debian stretch.
-deb http://debian.salud.gob.sv/debian/ bullseye main contrib non-free
-deb-src http://debian.salud.gob.sv/debian/ bullseye main contrib non-free
-
-deb http://debian.salud.gob.sv/debian/ bullseye-updates main contrib non-free
-deb-src http://debian.salud.gob.sv/debian/ bullseye-updates main contrib non-free
-
-deb http://debian.salud.gob.sv/debian-security/ bullseye-security main contrib non-free
-deb-src http://debian.salud.gob.sv/debian-security/ bullseye-security main contrib non-free
-```
-
-3. Actualizar la lista de paquetes de los repositorios.
-
-```bash
-aptitude update
-```
-
-Una vez hecho lo anterior ya se tienen los repositorios actualizados y con ello se puede proceder con la instalación de los paquetes necesarios para la instalación de la API.
-
 #### 1.2 Instalación de Node.js y NPM
 
 Debido a que las versiones de Node.js cambian con mucha rapidez se recomienda instalarlo a través de un administrador de versiones como **nvm**, para su instalación seguir los pasos detallados en el siguiente enlace: [**Click aquí**](https://github.com/nvm-sh/nvm#installing-and-updating).
@@ -101,7 +69,7 @@ A continuación se listan los pasos para la instalación y configuración de la 
 Clonar el proyecto desde los repositorios oficiales ejecutando el siguiente comando:
 
 ```bash
-git clone git@codigo.salud.gob.sv:plantillas/front-admin.git
+git clone git@github.com:WillianChavez/front-sic.git
 ```
 
 #### 2.2 Instalación de módulos
