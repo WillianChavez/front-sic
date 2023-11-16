@@ -25,6 +25,7 @@ export default new Vuex.Store({
           commit('setToken', token)
           localStorage.setItem('token', token)
           localStorage.setItem('refresh_token', refreshToken)
+          localStorage.setItem('user_info', JSON.stringify(jwtDecode(token)))
       }
     },
     modules: {

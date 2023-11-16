@@ -1,39 +1,34 @@
 <template>
   <v-container class="pa-0 pa-sm-2 justify-center d-flex" fill-height fluid>
     <v-flex xs12 sm11 md10 lg9>
-      <!-- COMENTADO PARA MAQUETACION 
-        <v-card rounded="lg">
-        <v-card-title class="mb-3">Administración</v-card-title>
-        <v-card-text>
-          <v-row
-            v-for="item in items"
-            :key="item.nombre"
-            style="border-top: 1px solid #f1f1f1"
-          >
-            <v-col cols="12" sm="6">
-              <p class="font-weight-bold">
-                {{ item.nombre }}
-              </p>
-            </v-col>
-            <v-col class="text-left" cols="12" sm="6">
-              <v-row dense>
-                <v-col
-                  v-for="(item, i) in item.acciones"
-                  class="text-sm"
-                  :key="i"
-                >
-                  <v-btn text class="blueMinsal--text" :to="item.path">
-                    <v-icon right class="mr-1">
-                      {{ item.icono }}
-                    </v-icon>
-                    {{ item.nombre }}
-                  </v-btn>
-                </v-col>
-              </v-row>
-            </v-col>
-          </v-row>
-        </v-card-text>
-      </v-card> -->
+
+      <!-- saludo al usuario -->
+      <h1 class="text-center pt-5 text--white">
+        Bienvenido {{ userInfo.user.nombre }}
+      </h1>
+
+      <!-- mensage de bienvenida y la foto de banner -->
+      <v-layout row wrap justify-center>
+        <v-flex xs12 sm12 md12 lg12 xl12>
+          <v-card class="pa-2 pa-sm-10 mt-5" rounded="lg" :elevation="5">
+            <v-card-text>
+              <v-layout row wrap justify-center>
+                <v-flex xs12 sm12 md12 lg12 xl12>
+                  <v-img class="mx-auto d-flex mb-2" src="@/assets/img/banner.png" max-width="550" />
+                </v-flex>
+                <v-flex xs12 sm12 md12 lg12 xl12>
+                  <p class="text-h5 text-center pt-5 text--white">
+                    Bienvenido a Gestión Financiera Funerales y Capillas Ismael Guzmán! <br>
+                    Una propuesta de software contable fácil de usar!
+                  </p>
+                </v-flex>
+              </v-layout>
+            </v-card-text>
+          </v-card>
+        </v-flex>
+      </v-layout>
+
+
     </v-flex>
   </v-container>
 </template>
@@ -90,6 +85,10 @@ export default {
       },
     ],
   }),
-  created() {},
+  created() { },
+
+  computed: {
+    ...mapState(["userInfo"]),
+  },
 };
 </script>

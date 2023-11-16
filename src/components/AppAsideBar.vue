@@ -9,16 +9,21 @@
       <v-card elevation="2" class="ma-4 py-0" v-if="!sideBar">
         <v-card-title>
           <img
-              :src="require(`@/assets/img/SIS-HAZUL.png`)"
+              :src="require(`@/assets/img/banner.png`)"
               width="95%"
               height="auto"
           />
         </v-card-title>
       </v-card>
-      <v-list-item v-else two-line>
+      <v-list-item v-else style="height: 10rem; display: flex; justify-content: center;">
         <v-btn text icon x-large color="blueMinsal"
         >
-          <v-icon size="30">mdi-asterisk</v-icon>
+
+          <img
+              :src="require(`@/assets/img/banner.png`)"
+              width="150px"
+              height="auto"
+          />
         </v-btn
         >
       </v-list-item>

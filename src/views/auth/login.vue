@@ -6,10 +6,10 @@
           <v-flex xs12 sm8 md6 lg4 xl3>
             <v-img
                 class="mx-auto d-flex mb-2"
-                src="@/assets/img/SIS-HAZUL.png"
+                src="@/assets/img/banner.png"
                 max-width="350"
             />
-            <v-card class="pa-2 pa-sm-10" rounded="lg" :elevation="5">
+            <v-card class="pa-2 pa-sm-10 mt-5" rounded="lg" :elevation="5">
               <p class="text-h5 text-center pt-5 blueGrayMinsal--text">
                 Inicie sesión para continuar
               </p>
@@ -61,7 +61,7 @@
                   </v-col>
                 </v-row>
                 <v-row class="pa-0 ma-0">
-                  <v-btn
+                  <!-- <v-btn
                       text
                       style="text-transform: none"
                       color="blueMinsal"
@@ -69,8 +69,7 @@
                       rounded
                       :to="{name:'forgot-password'}"
                   >Olvidaste tu contraseña?
-                  </v-btn
-                  >
+                  </v-btn -->
                 </v-row>
               </v-form>
             </v-card>
@@ -82,11 +81,6 @@
     <v-footer class="text-center blueDarkMinsal py-3">
       <v-row>
         <v-col cols="12" sm="6" md="4">
-          <v-img
-              src="@/assets/img/escudo-white-minsal.png"
-              width="200"
-              class="mx-auto"
-          />
         </v-col>
         <v-col
             class="text-center white--text font-weight-bold align-center"
@@ -95,17 +89,13 @@
             md="4"
         >
           <p class="ma-0 font-weight-thin">
-            Ministerio de Salud <br/>
+            <br/>
             República de El Salvador, C.A <br/>
-            Calle Arce No. 827, San Salvador, El Salvador
+            Cabañas, Ilobasco
+            
           </p>
         </v-col>
         <v-col cols="12" sm="12" md="4">
-          <v-img
-              src="@/assets/img/SIS-HBLANCO.png"
-              width="150"
-              class="mx-auto"
-          />
         </v-col>
       </v-row>
     </v-footer>

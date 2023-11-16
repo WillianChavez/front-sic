@@ -4,6 +4,7 @@ import rolesRouter from "../views/roles/rolesRouter";
 import profilesRouter from "../views/profiles/profilesRouter";
 import usersRouter from "../views/users/userRouter";
 import pathsRouter from "../views/paths/pathRouter";
+import cuentasRouter from "../views/cuentas/router";
 
 Vue.use(VueRouter);
 
@@ -28,6 +29,7 @@ const routes = [
             ...profilesRouter,
             ...usersRouter,
             ...pathsRouter,
+            ...cuentasRouter,
             {
                 path: "/security",
                 name: "security",
