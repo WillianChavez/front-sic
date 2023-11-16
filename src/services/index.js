@@ -5,6 +5,8 @@ import roles from './roles.services'
 import profiles from './profiles.services'
 import typeRoles from './typeRoles.services'
 import paths from './path.services'
+import catalogo from './catalogo.services'
+import cuenta from './cuenta.services'
 
 Vue.prototype.services = {
     auth,
@@ -12,5 +14,7 @@ Vue.prototype.services = {
     roles,
     profiles,
     typeRoles,
-    paths
+    paths,
+    catalogo,
+    cuenta
 }
