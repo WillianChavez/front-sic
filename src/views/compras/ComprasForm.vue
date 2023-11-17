@@ -8,32 +8,52 @@
         <v-card-text>
           <v-row>
             <v-col cols="12" md="4">
-              <v-text-field v-model="form.fecha_emision" label="Fecha de emisión" :error-messages="fechaEmisionErrors"
-                @blur="$v.form.fecha_emision.$touch()" required></v-text-field>
+              <v-menu v-model="menu" :close-on-content-click="false" :nudge-right="40" transition="scale-transition"
+                offset-y min-width="290px">
+                <template v-slot:activator="{ on, attrs }">
+                  <v-text-field v-model="form.fecha_emision" label="Fecha de emisión" prepend-icon="mdi-calendar" readonly
+                    v-bind="attrs" v-on="on" :error-messages="fechaEmisionErrors" @blur="$v.form.fecha_emision.$touch()"
+                    required></v-text-field>
+                </template>
+                <v-date-picker v-model="form.fecha_emision" @input="menu = false" locale="es" scrollable>
+                  <v-spacer></v-spacer>
+                  <v-btn text color="primary" @click="menu = false">
+                    Cancel
+                  </v-btn>
+                  <v-btn text color="primary" @click="$refs.menu.save(form.fecha_emision)">
+                    OK
+                  </v-btn>
+                </v-date-picker>
+              </v-menu>
+
+
+
               <v-text-field v-model="form.descripcion" label="Descripción" :error-messages="descripcionErrors"
                 @blur="$v.form.descripcion.$touch()" required></v-text-field>
               <v-text-field v-model="form.numero_documento_cff" label="Número de documento"
-                :error-messages="numeroDocumentoCffErrors" @blur="$v.form.numero_documento_cff.$touch()"
+                :error-messages="numeroDocumentoCffErrors" @blur="$v.form.numero_documento_cff.$touch()" 
                 required></v-text-field>
             </v-col>
             <v-col cols="12" md="4">
               <v-text-field v-model="form.persona.nombre" label="Nombre" :error-messages="nombreErrors"
                 @blur="$v.form.persona.nombre.$touch()" required></v-text-field>
-              <v-select v-model="form.id_cuenta_contable" :items="cuentas" item-text="nombre" item-value="id"
+              <v-autocomplete v-model="form.id_cuenta_contable" :items="cuentas" item-text="nombre" item-value="id"
                 label="Cuenta contable" :error-messages="cuentaContableErrors" @blur="$v.form.id_cuenta_contable.$touch()"
-                required></v-select>
-              <v-text-field v-model="form.persona.nrc" label="NRC" @blur="$v.form.persona.nrc.$touch()"></v-text-field>
+                required></v-autocomplete>
+              <v-text-field v-model="form.persona.nrc" label="NRC" @blur="$v.form.persona.nrc.$touch()" :rules="numericRules"
+                :error-messages="nrcErrors"></v-text-field>
             </v-col>
+
             <v-col cols="12" md="4">
-              <!-- tipo contribuyente, numero de documento ccf, nit -->
-              <v-select v-model="form.id_tipo_contribuyente" :items="tipoContribuyentes" item-text="nombre"
-                item-value="id" label="Tipo de contribuyente"></v-select>
-              <v-select v-model="form.id_cuenta_contrapartida" :items="cuentas" item-text="nombre" item-value="id"
+              <v-autocomplete v-model="form.id_tipo_contribuyente" :items="tipoContribuyentes" item-text="nombre"
+                item-value="id" label="Tipo de contribuyente"></v-autocomplete>
+              <v-autocomplete v-model="form.id_cuenta_contrapartida" :items="cuentas" item-text="nombre" item-value="id"
                 label="Cuenta contrapartida" :error-messages="cuentaContrapartidaErrors"
-                @blur="$v.form.id_cuenta_contrapartida.$touch()" required></v-select>
+                @blur="$v.form.id_cuenta_contrapartida.$touch()" required></v-autocomplete>
               <v-text-field v-model="form.persona.nit" label="NIT" :error-messages="nitErrors"
                 @blur="$v.form.persona.nit.$touch()" required></v-text-field>
             </v-col>
+
           </v-row>
         </v-card-text>
 
@@ -44,33 +64,28 @@
               <v-card class="pa-2 pa-sm-4" rounded="lg">
                 <v-card-text>
                   <v-row>
-                    <v-col cols="12" md="8">
-                      <v-text-field v-model="form.detalleCompra.gravado_interno" label="Gravado interno"
+                    <v-col cols="12" md="12">
+                      <v-text-field v-model="form.detalleCompra.gravado_interno" label="Gravado interno" :rules="numericRules" ref="gravado_interno"
                         @blur="$v.form.detalleCompra.gravado_interno.$touch()" required></v-text-field>
-                      <v-text-field v-model="form.detalleCompra.exento_interno" label="Exento interno"
+                      <v-text-field v-model="form.detalleCompra.exento_interno" label="Exento interno" :rules="numericRules" ref="exento_interno"
                         @blur="$v.form.detalleCompra.exento_interno.$touch()" required></v-text-field>
-                      <v-text-field v-model="form.detalleCompra.exento_importacion" label="Exento importación"
+                      <v-text-field v-model="form.detalleCompra.exento_importacion" label="Exento importación" :rules="numericRules" ref="exento_importacion"
                         @blur="$v.form.detalleCompra.exento_importacion.$touch()" required></v-text-field>
-                    </v-col>
-                    <v-col cols="12" md="4">
-                      <v-text-field v-model="form.detalleCompra.compras_sujeto_excluido" label="Compras sujeto excluido"
-                        :error-messages="comprasSujetoExluidoErrors"
+                      <v-text-field v-model="form.detalleCompra.compras_sujeto_excluido" label="Compras sujeto excluido" :rules="numericRules" ref="compras_sujeto_excluido"
                         @blur="$v.form.detalleCompra.compras_sujeto_excluido.$touch()" required></v-text-field>
-                    </v-col>
-                    <v-col cols="12" md="4">
                     </v-col>
                   </v-row>
                 </v-card-text>
               </v-card>
             </v-col>
             <v-col class="pa-5 rounded bgMinsal px-5" cols="12" md="4">
-              <v-text-field v-model="form.detalleCompra.anticipo_uno_porciento_retenido" label="Anticipo 1% retenido"
+              <v-text-field v-model="form.detalleCompra.anticipo_uno_porciento_retenido" label="Anticipo 1% retenido" readonly
                 @blur="$v.form.detalleCompra.anticipo_uno_porciento_retenido.$touch()" required></v-text-field>
 
-              <v-text-field v-model="form.detalleCompra.iva_credito_fiscal" label="IVA crédito fiscal"
+              <v-text-field v-model="form.detalleCompra.iva_credito_fiscal" label="IVA crédito fiscal" readonly
                 @blur="$v.form.detalleCompra.iva_credito_fiscal.$touch()" required></v-text-field>
 
-              <v-text-field v-model="form.detalleCompra.total" label="Total" @blur="$v.form.detalleCompra.total.$touch()"
+              <v-text-field v-model="form.detalleCompra.total" label="Total" @blur="$v.form.detalleCompra.total.$touch()" readonly
                 required></v-text-field>
             </v-col>
           </v-row>
@@ -96,7 +111,7 @@
 <script>
 import { mapActions } from "vuex";
 import AppSearchList from "../../components/AppSearchList";
-import { required, decimal, helpers } from "vuelidate/lib/validators";
+import { required, numeric } from "vuelidate/lib/validators";
 
 export default {
   name: "pathForm",
@@ -128,6 +143,10 @@ export default {
     loading_navigate: false,
     cuentas: [],
     tipoContribuyentes: [],
+    numericRules: [
+      v => !!v || 'Este campo es requerido',
+      v => /^\d+(\.\d{1,2})?$/.test(v) || 'Este campo debe ser numérico',
+    ],
   }),
 
   created() {
@@ -153,12 +172,14 @@ export default {
       const errors = []
       if (!this.$v.form.numero_documento_cff.$dirty) return errors
       !this.$v.form.numero_documento_cff.required && errors.push('Número de documento es requerido')
+      !this.$v.form.numero_documento_cff.numeric && errors.push('Número de documento debe ser numérico')
       return errors
     },
     nitErrors() {
       const errors = []
       if (!this.$v.form.persona.nit.$dirty) return errors
       !this.$v.form.persona.nit.required && errors.push('NIT es requerido')
+      !this.$v.form.persona.nit.numeric && errors.push('NIT debe ser numérico')
       return errors
     },
     nombreErrors() {
@@ -188,6 +209,16 @@ export default {
       !this.$v.form.id_cuenta_contrapartida.required && errors.push('Cuenta contrapartida es requerida')
       return errors
     },
+    nrcErrors() {
+      const errors = []
+      if (!this.$v.form.persona.nrc.$dirty) return errors
+      !this.$v.form.persona.nrc.numeric && errors.push('NRC debe ser numérico')
+      return errors
+    },
+    totales(){
+
+    }
+
   },
 
 
@@ -206,16 +237,21 @@ export default {
         required
       },
       numero_documento_cff: {
-        required
+        required,
+        numeric
+
       },
       persona: {
         nombre: {
           required
         },
         nit: {
-          required
+          required,
+          numeric
+
         },
         nrc: {
+          numeric
         },
       },
 
@@ -276,5 +312,23 @@ export default {
     },
 
   },
+
+  watch: {
+    'form.id_tipo_contribuyente': function (val) {
+      // si el valor es 3, deshabilitar el campo de gravado interno, gravado importacion, exento interno, exento importacion
+      if (val === 3) {
+        this.form.detalleCompra.gravado_interno = null
+        this.form.detalleCompra.gravado_importacion = null
+        this.form.detalleCompra.exento_interno = null
+        this.form.detalleCompra.exento_importacion = null
+        // bloquear los campos
+        this.$refs.gravado_interno.disabled = true
+        this.$refs.gravado_importacion.disabled = true
+        this.$refs.exento_interno.disabled = true
+        this.$refs.exento_importacion.disabled = true
+
+      }
+    },
+  }
 };
 </script>
