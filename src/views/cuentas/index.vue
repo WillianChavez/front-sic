@@ -27,7 +27,7 @@
               <v-btn icon small @click="editCuenta(item.id)">
                 <v-icon>mdi-pencil</v-icon>
               </v-btn>
-              <v-btn icon small @click="deleteCuenta(item.id)">
+              <v-btn icon small @click="deleteCuenta(item.id)" v-if="!item.requerido">
                 <v-icon>mdi-delete</v-icon>
               </v-btn>
             </template>

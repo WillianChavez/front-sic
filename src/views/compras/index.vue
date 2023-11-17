@@ -58,20 +58,66 @@ export default {
     loading: false,
     headers: [
       {
-        text: "Nombre",
+        text: "Fecha de emisión",
         align: "start",
-        value: "nombre",
+        value: "fecha",
       },
       {
-        text: "Código",
+        text: "Proveedor",
         align: "start",
-        value: "codigo",
+        value: "Persona.nombre",
       },
       {
-        text: "Tipo de cuenta",
+        text: "Descripción",
         align: "start",
-        value: "TipoCuentum.nombre",
+        value: "descripcion",
       },
+      {
+        text: "N° de documento",
+        align: "start",
+        value: "numero_documento",
+      },
+      {
+        text: "Cuenta contable",
+        align: "start",
+        value: "Cuenta.nombre",
+      },
+      {
+        text: "Cuenta contrapartida",
+        align: "start",
+        value: "Cuenta.nombre",
+      },
+      {
+        text: "Gravadas internas",
+        align: "start",
+        value: "gravadas_internas",
+      },
+      {
+        text: "Gravadas de importación",
+        align: "start",
+        value: "gravadas_importacion",
+      },
+      {
+        text: "Exentas internas",
+        align: "start",
+        value: "exentas_internas",
+      },
+      {
+        text: "Exentas de internación",
+        align: "start",
+        value: "exentas_internacion",
+      },
+      {
+        text: "Exentas de importación",
+        align: "start",
+        value: "exentas_importacion",
+      },
+      {
+        text: "Compras sujeto exluido",
+        align: "start",
+        value: "sujeto_excluido",
+      },
+
       { text: "Accion", value: "accion", sortable: false, width: "100" },
     ],
     page: 1,
