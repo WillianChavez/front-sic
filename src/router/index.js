@@ -5,6 +5,7 @@ import profilesRouter from "../views/profiles/profilesRouter";
 import usersRouter from "../views/users/userRouter";
 import pathsRouter from "../views/paths/pathRouter";
 import cuentasRouter from "../views/cuentas/router";
+import comprasRouter from "../views/compras/router";
 
 Vue.use(VueRouter);
 
@@ -30,6 +31,7 @@ const routes = [
             ...usersRouter,
             ...pathsRouter,
             ...cuentasRouter,
+            ...comprasRouter,
             {
                 path: "/security",
                 name: "security",
