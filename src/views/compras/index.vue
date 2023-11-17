@@ -5,7 +5,7 @@
         <v-card-title primary-title class="d-flex justify-space-between blueGrayMinsal--text">
           Compras
           <div>
-            <v-btn rounded color="blueMinsal" class="white--text ma-1" @click="storeCompra">
+            <v-btn rounded color="blueMinsal" class="white--text ma-1" :to="{ name: 'compras-crear' }">
               <v-icon left>mdi-plus</v-icon>
               Agregar
             </v-btn>
