@@ -6,6 +6,8 @@ import usersRouter from "../views/users/userRouter";
 import pathsRouter from "../views/paths/pathRouter";
 import cuentasRouter from "../views/cuentas/router";
 import comprasRouter from "../views/compras/router";
+import serviciosRouter from '../views/servicios/router';
+import reportesRouter from '../views/reportes/router';
 
 Vue.use(VueRouter);
 
@@ -32,6 +34,8 @@ const routes = [
             ...pathsRouter,
             ...cuentasRouter,
             ...comprasRouter,
+            ...serviciosRouter,
+            ...reportesRouter,
             {
                 path: "/security",
                 name: "security",

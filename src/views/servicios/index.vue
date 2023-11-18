@@ -3,9 +3,9 @@
     <v-flex xs12 sm11 md11 lg10>
       <v-card class="pa-4" rounded="lg">
         <v-card-title primary-title class="d-flex justify-space-between blueGrayMinsal--text">
-          Compras
+          Servicios
           <div>
-            <v-btn rounded color="blueMinsal" class="white--text ma-1" @click="storeCuenta">
+            <v-btn rounded color="blueMinsal" class="white--text ma-1" :to="{ name: 'servicios-crear' }">
               <v-icon left>mdi-plus</v-icon>
               Agregar
             </v-btn>
@@ -13,7 +13,7 @@
         </v-card-title>
         <v-card-text>
           <v-skeleton-loader v-if="loading"></v-skeleton-loader>
-          <v-data-table :headers="headers" :items="compras" item-key="id" class="elevation-0 border-1"
+          <v-data-table :headers="headers" :items="data" item-key="id" class="elevation-0 border-1"
             no-data-text="No hay datos" no-results-text="No hay resultados" disable-pagination hide-default-footer v-else>
             <template v-slot:[`item.mostrar`]="{ item }">
               <v-chip class="ma-2 white--text" color="blueMinsal" small v-if="item.mostrar">
@@ -24,10 +24,10 @@
               </v-chip>
             </template>
             <template v-slot:[`item.accion`]="{ item }">
-              <v-btn icon small @click="editCuenta(item.id)">
+              <v-btn icon small :to="`/compras/${item.id}/edit`">
                 <v-icon>mdi-pencil</v-icon>
               </v-btn>
-              <v-btn icon small @click="deleteCuenta(item.id)">
+              <v-btn icon small @click="deleteServicio(item.id)">
                 <v-icon>mdi-delete</v-icon>
               </v-btn>
             </template>
@@ -40,7 +40,7 @@
               <p>Total registros {{ total_rows }}</p>
             </v-col>
             <v-col>
-              <v-pagination v-model="page" @input="getCompras" :length="totalPages"></v-pagination>
+              <v-pagination v-model="page" @input="getServicios" :length="totalPages"></v-pagination>
             </v-col>
           </v-row>
         </v-card-text>
@@ -50,7 +50,6 @@
 </template>
 <script>
 import { mapActions } from "vuex";
-import { required } from "vuelidate/lib/validators";
 
 export default {
   data: () => ({
@@ -59,22 +58,71 @@ export default {
     loading: false,
     headers: [
       {
-        text: "Nombre",
+        text: "Fecha",
         align: "start",
-        value: "nombre",
+        value: "fecha",
       },
       {
-        text: "Código",
+        text: "Descripción",
         align: "start",
-        value: "codigo",
+        value: "descripcion",
       },
       {
-        text: "Tipo de cuenta",
+        text: "cliente",
         align: "start",
-        value: "TipoCuentum.nombre",
+        value: "persona.nombre",
       },
+      {
+        text: "Emsisión de documento",
+        align: "start",
+        value: "Cuenta.e",
+      },
+      {
+        text: "N° de documento",
+        align: "start",
+        value: "numero_documento",
+      },
+      {
+        text: "Cuenta contable",
+        align: "start",
+        value: "Cuenta.nombre",
+      },
+      {
+        text: "Cuenta contrapartida",
+        align: "start",
+        value: "ee",
+      },
+      {
+        text: "Gravadas locales",
+        align: "start",
+        value: "gravadas_locales",
+      },
+      {
+        text: "Gravadas de exportación",
+        align: "start",
+        value: "gravadas_exportacion",
+      },
+      {
+        text: "Exentas",
+        align: "start",
+        value: "exentas",
+      },
+      {
+        text: "No sujetas",
+        align: "start",
+        value: "no_sujetas",
+      },
+      {
+        text: "Anticipo 1% retenido",
+        align: "start",
+        value: "anticipo",
+      },
+
       { text: "Accion", value: "accion", sortable: false, width: "100" },
     ],
+    data: [
+       { "fecha": "20/11/2023", ee:"Caja", "descripcion": "Servicio de funerarios", "persona": { "nombre": "Luis Rodríguez" }, "numero_documento": "001", "Cuenta": { "nombre": "Servicios fúnebres", "contra:":"Inventario","e":"Comprobante crédito fiscal" }, "gravadas_locales": 1500, "gravadas_exportacion": 0, "exentas": 0, "no_sujetas": 0, "anticipo": 15 }],
+
     page: 1,
     per_page: 10,
     total_rows: 0,
@@ -88,9 +136,9 @@ export default {
 
   methods: {
     ...mapActions("utils", ["getMenu"]),
-    async getCompras() {
+    async getServicios() {
       this.loading = true;
-      const response = await this.services.cuenta.getCompras({
+      const response = await this.services.servicio.getServicios({
         page: this.page,
         per_page: this.per_page
       })
@@ -101,15 +149,15 @@ export default {
       this.total_rows = total_rows;
       this.loading = false;
     },
-    async deleteCuenta(id) {
-      const response = await this.services.cuenta.deleteCuenta(id)
+    async deleteServicio(id) {
+      const response = await this.services.servicio.deleteServicio(id)
       if (response.status === 200) {
         this.temporalAlert({
           show: true,
-          message: 'Cuenta eliminada con éxito',
+          message: 'Servicio eliminada con éxito',
           type: "success",
         });
-        this.getCompras()
+        this.getServicios()
       }
     },
   },
@@ -121,11 +169,11 @@ export default {
   watch: {
     per_page() {
       this.page = 1;
-      this.getCompras()
+      // this.getServicios()
     }
   },
   async created() {
-    this.getCompras()
+    // this.getServicios()
   },
 };
 </script>

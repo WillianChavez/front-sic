@@ -3,7 +3,7 @@
     <v-flex xs12 sm11 md10 lg9>
       <v-card class="pa-2 pa-sm-4" rounded="lg">
         <v-card-title primary-title class="d-flex justify-space-between blueGrayMinsal--text">
-          Compra
+          Servicio
         </v-card-title>
         <v-card-text>
           <v-row>
@@ -30,12 +30,14 @@
 
               <v-text-field v-model="form.descripcion" label="Descripción" :error-messages="descripcionErrors"
                 @blur="$v.form.descripcion.$touch()" required></v-text-field>
-              <v-text-field v-model="form.numero_documento_cff" label="Número de documento"
-                :error-messages="numeroDocumentoCffErrors" @blur="$v.form.numero_documento_cff.$touch()"
-                required></v-text-field>
+                
+              <v-autocomplete v-model="form.id_tipo_emision_documento" :items="emisionDocs" item-text="nombre" item-value="id"
+                label="Emisión de Documento" :error-messages="cuentaContableErrors" @blur="$v.form.id_cuenta_contable.$touch()"
+                required></v-autocomplete>
+
             </v-col>
             <v-col cols="12" md="4">
-              <v-text-field v-model="form.persona.nombre" label="Proveedor" :error-messages="nombreErrors"
+              <v-text-field v-model="form.persona.nombre" label="Cliente" :error-messages="nombreErrors"
                 @blur="$v.form.persona.nombre.$touch()" required></v-text-field>
               <v-autocomplete v-model="form.id_cuenta_contable" :items="cuentasList" item-text="nombre" item-value="id"
                 label="Cuenta contable" :error-messages="cuentaContableErrors" @blur="$v.form.id_cuenta_contable.$touch()"
@@ -65,21 +67,22 @@
                 <v-card-text>
                   <v-row>
                     <v-col cols="12" md="12">
-                      <v-text-field v-model="form.detalleCompra.gravado_interno" label="Gravado interno"
+
+                      <v-text-field v-model="form.numero_documento_cff" label="Número de documento (CCF)"
+                        :error-messages="numeroDocumentoCffErrors" @blur="$v.form.numero_documento_cff.$touch()"
+                        required></v-text-field>
+                      <v-text-field v-model="form.detalleCompra.gravado_interno" label="Gravados locales"
                         :rules="numericRules" ref="gravado_interno"
                         @blur="$v.form.detalleCompra.gravado_interno.$touch()"></v-text-field>
-                      <v-text-field v-model="form.detalleCompra.gravado_importacion" label="Gravado importación"
+                      <v-text-field v-model="form.detalleCompra.gravado_importacion" label="Exentas (USD)"
                         :rules="numericRules" ref="gravado_importacion"
                         @blur="$v.form.detalleCompra.gravado_importacion.$touch()"></v-text-field>
-                      <v-text-field v-model="form.detalleCompra.exento_interno" label="Exento interno"
+                      <v-text-field v-model="form.detalleCompra.exento_interno" label="No Sujetas (USD)"
                         :rules="numericRules" ref="exento_interno"
                         @blur="$v.form.detalleCompra.exento_interno.$touch()"></v-text-field>
-                      <v-text-field v-model="form.detalleCompra.exento_importacion" label="Exento importación"
-                        :rules="numericRules" ref="exento_importacion"
+                      <v-text-field v-model="form.detalleCompra.exento_importacion" label="Gravados de exportación"
+                        :rules="numericRules" ref="exento_importacion" disabled
                         @blur="$v.form.detalleCompra.exento_importacion.$touch()"></v-text-field>
-                      <v-text-field v-model="form.detalleCompra.compras_sujeto_excluido" label="Compras sujeto excluido"
-                        :rules="numericRules" ref="compras_sujeto_excluido"
-                        @blur="$v.form.detalleCompra.compras_sujeto_excluido.$touch()"></v-text-field>
                     </v-col>
                   </v-row>
                 </v-card-text>
@@ -87,12 +90,11 @@
             </v-col>
             <v-col class="pa-5 rounded bgMinsal px-5" cols="12" md="4">
               <v-text-field v-model="form.detalleCompra.anticipo_uno_porciento_retenido" label="Anticipo 1% retenido"
-                readonly @blur="$v.form.detalleCompra.anticipo_uno_porciento_retenido.$touch()" required></v-text-field>
+                readonly @blur="$v.form.detalleCompra.anticipo_uno_porciento_retenido.$touch()" ></v-text-field>
 
-              <v-text-field label="IVA crédito fiscal" v-model="form.cuentas[0].haber" readonly></v-text-field>
+              <v-text-field label="IVA crédito fiscal" v-model="form.cuentas[0].haber" ></v-text-field>
 
-              <v-text-field v-model="form.detalleCompra.total" label="Total" 
-                ></v-text-field>
+              <v-text-field v-model="form.detalleCompra.total" label="Total" ></v-text-field>
             </v-col>
           </v-row>
         </v-card-actions>
@@ -131,6 +133,7 @@ export default {
       id_tipo_contribuyente: null,
       id_cuenta_contable: null,
       id_cuenta_contrapartida: null,
+      id_tipo_emision_documento: null,
       persona: {
         nit: null,
         nombre: null,
@@ -148,7 +151,7 @@ export default {
         { // iva credito fiscal
           id_cuenta: 6,
           debe: 0,
-          haber : 0
+          haber: 0
         }
         // cuenta contable
       ],
@@ -158,6 +161,7 @@ export default {
     loading_navigate: false,
     cuentasList: [],
     tipoContribuyentes: [],
+    emisionDocs : [],
     numericRules: [
       v => /^\d+(\.\d{1,2})?$/.test(v) || 'Este campo debe ser numérico',
     ],
@@ -166,6 +170,7 @@ export default {
   created() {
     this.getCuentas()
     this.getTipoContribuyentes()
+    this.getTipoEmisionDocumento()
   },
 
   computed: {
@@ -328,6 +333,12 @@ export default {
       this.cuentasList = response.data
     },
 
+    async getTipoEmisionDocumento() {
+      const response = await this.services.catalogo.getTipoEmisionDocumentos({
+        paginacion: false
+      })
+      this.emisionDocs = response.data
+    },
     async getTipoContribuyentes() {
       const response = await this.services.catalogo.getTipoContribuyentes({
         paginacion: false
@@ -338,42 +349,42 @@ export default {
   },
 
   watch: {
-    'form.id_tipo_contribuyente': function (val) {
-      // si el valor es 3, deshabilitar el campo de gravado interno, gravado importacion, exento interno, exento importacion
+    // 'form.id_tipo_contribuyente': function (val) {
+    //   // si el valor es 3, deshabilitar el campo de gravado interno, gravado importacion, exento interno, exento importacion
 
-      //resetear los errores
+    //   //resetear los errores
 
-      if (val === 3) {
-        this.form.detalleCompra.gravado_interno = 0
-        this.form.detalleCompra.gravado_importacion = 0
-        this.form.detalleCompra.exento_interno = 0
-        this.form.detalleCompra.exento_importacion = 0
-        this.form.detalleCompra.compras_sujeto_excluido = 0
-        this.form.persona.nrc = null
-        // bloquear los campos
-        this.$refs.gravado_interno.disabled = true
-        this.$refs.gravado_importacion.disabled = true
-        this.$refs.exento_interno.disabled = true
-        this.$refs.exento_importacion.disabled = true
-        this.$refs.nrc.disabled = true
-        // quitamos validaciones
-        this.$refs.nrc.resetValidation()
-        this.$refs.compras_sujeto_excluido.disabled = false
+    //   if (val === 3) {
+    //     this.form.detalleCompra.gravado_interno = 0
+    //     this.form.detalleCompra.gravado_importacion = 0
+    //     this.form.detalleCompra.exento_interno = 0
+    //     this.form.detalleCompra.exento_importacion = 0
+    //     this.form.detalleCompra.compras_sujeto_excluido = 0
+    //     this.form.persona.nrc = null
+    //     // bloquear los campos
+    //     this.$refs.gravado_interno.disabled = true
+    //     this.$refs.gravado_importacion.disabled = true
+    //     this.$refs.exento_interno.disabled = true
+    //     this.$refs.exento_importacion.disabled = true
+    //     this.$refs.nrc.disabled = true
+    //     // quitamos validaciones
+    //     this.$refs.nrc.resetValidation()
+    //     this.$refs.compras_sujeto_excluido.disabled = false
 
-      }
+    //   }
 
-      if (val !== 3) {
-        this.form.detalleCompra.compras_sujeto_excluido = 0
+    //   if (val !== 3) {
+    //     this.form.detalleCompra.compras_sujeto_excluido = 0
 
-        this.$refs.gravado_interno.disabled = false
-        this.$refs.gravado_importacion.disabled = false
-        this.$refs.exento_interno.disabled = false
-        this.$refs.exento_importacion.disabled = false
-        this.$refs.compras_sujeto_excluido.disabled = true
-        this.$refs.nrc.disabled = false
-      }
+    //     this.$refs.gravado_interno.disabled = false
+    //     this.$refs.gravado_importacion.disabled = false
+    //     this.$refs.exento_interno.disabled = false
+    //     this.$refs.exento_importacion.disabled = false
+    //     this.$refs.compras_sujeto_excluido.disabled = true
+    //     this.$refs.nrc.disabled = false
+    //   }
 
-    },
+    // },
 
     'form.detalleCompra.gravado_interno': function (val) {
       this.form.detalleCompra.anticipo_uno_porciento_retenido = val * 0.01

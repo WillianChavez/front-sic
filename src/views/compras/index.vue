@@ -13,7 +13,7 @@
         </v-card-title>
         <v-card-text>
           <v-skeleton-loader v-if="loading"></v-skeleton-loader>
-          <v-data-table :headers="headers" :items="compras" item-key="id" class="elevation-0 border-1"
+          <v-data-table :headers="headers" :items="data" item-key="id" class="elevation-0 border-1"
             no-data-text="No hay datos" no-results-text="No hay resultados" disable-pagination hide-default-footer v-else>
             <template v-slot:[`item.mostrar`]="{ item }">
               <v-chip class="ma-2 white--text" color="blueMinsal" small v-if="item.mostrar">
@@ -85,7 +85,7 @@ export default {
       {
         text: "Cuenta contrapartida",
         align: "start",
-        value: "Cuenta.nombre",
+        value: "ee",
       },
       {
         text: "Gravadas internas",
@@ -120,6 +120,7 @@ export default {
 
       { text: "Accion", value: "accion", sortable: false, width: "100" },
     ],
+    data: [{ "fecha": "21/11/2023", ee: "Inventario" ,"Persona": { "nombre": "Carlos Sánchez" }, "descripcion": "Compra de Velas", "numero_documento": "002", "Cuenta": { "nombre": "Banco" }, "gravadas_internas": 200, "gravadas_importacion": 0, "exentas_internas": 0, "exentas_internacion": 0, "exentas_importacion": 0, "sujeto_excluido": 200 }],
     page: 1,
     per_page: 10,
     total_rows: 0,

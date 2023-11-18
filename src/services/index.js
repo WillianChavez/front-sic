@@ -8,6 +8,7 @@ import paths from './path.services'
 import catalogo from './catalogo.services'
 import cuenta from './cuenta.services'
 import compra from './compra.services'
+import servicio from './servicio.services'
 
 Vue.prototype.services = {
     auth,
@@ -19,4 +20,5 @@ Vue.prototype.services = {
     catalogo,
     cuenta,
     compra,
+    servicio
 }
