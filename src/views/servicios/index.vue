@@ -24,8 +24,9 @@
               </v-chip>
             </template>
             <template v-slot:[`item.accion`]="{ item }">
-              <v-btn icon small :to="`/compras/${item.id}/edit`">
-                <v-icon>mdi-pencil</v-icon>
+              <!-- ver -->
+              <v-btn icon small :to="`/servicios/crear?show=true`">
+                <v-icon>mdi-eye</v-icon>
               </v-btn>
               <v-btn icon small @click="deleteServicio(item.id)">
                 <v-icon>mdi-delete</v-icon>
@@ -121,7 +122,7 @@ export default {
       { text: "Accion", value: "accion", sortable: false, width: "100" },
     ],
     data: [
-       { "fecha": "20/11/2023", ee:"Caja", "descripcion": "Servicio de funerarios", "persona": { "nombre": "Luis Rodríguez" }, "numero_documento": "001", "Cuenta": { "nombre": "Servicios fúnebres", "contra:":"Inventario","e":"Comprobante crédito fiscal" }, "gravadas_locales": 1500, "gravadas_exportacion": 0, "exentas": 0, "no_sujetas": 0, "anticipo": 15 }],
+       { "fecha": "20/11/2023", ee:"Caja", "descripcion": "Servicios funerarios", "persona": { "nombre": "Luis Rodríguez" }, "numero_documento": "001", "Cuenta": { "nombre": "Servicios de desarrollo", "contra:":"Inventario","e":"Comprobante crédito fiscal" }, "gravadas_locales": 1500, "gravadas_exportacion": 0, "exentas": 0, "no_sujetas": 0, "anticipo": 15 }],
 
     page: 1,
     per_page: 10,

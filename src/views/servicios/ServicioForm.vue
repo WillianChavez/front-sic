@@ -30,10 +30,10 @@
 
               <v-text-field v-model="form.descripcion" label="Descripción" :error-messages="descripcionErrors"
                 @blur="$v.form.descripcion.$touch()" required></v-text-field>
-                
-              <v-autocomplete v-model="form.id_tipo_emision_documento" :items="emisionDocs" item-text="nombre" item-value="id"
-                label="Emisión de Documento" :error-messages="cuentaContableErrors" @blur="$v.form.id_cuenta_contable.$touch()"
-                required></v-autocomplete>
+
+              <v-autocomplete v-model="form.id_tipo_emision_documento" :items="emisionDocs" item-text="nombre"
+                item-value="id" label="Emisión de Documento" :error-messages="cuentaContableErrors"
+                @blur="$v.form.id_cuenta_contable.$touch()" required></v-autocomplete>
 
             </v-col>
             <v-col cols="12" md="4">
@@ -90,11 +90,11 @@
             </v-col>
             <v-col class="pa-5 rounded bgMinsal px-5" cols="12" md="4">
               <v-text-field v-model="form.detalleCompra.anticipo_uno_porciento_retenido" label="Anticipo 1% retenido"
-                readonly @blur="$v.form.detalleCompra.anticipo_uno_porciento_retenido.$touch()" ></v-text-field>
+                readonly @blur="$v.form.detalleCompra.anticipo_uno_porciento_retenido.$touch()"></v-text-field>
 
-              <v-text-field label="IVA crédito fiscal" v-model="form.cuentas[0].haber" ></v-text-field>
+              <v-text-field label="IVA crédito fiscal" v-model="form.cuentas[0].haber"></v-text-field>
 
-              <v-text-field v-model="form.detalleCompra.total" label="Total" ></v-text-field>
+              <v-text-field v-model="form.detalleCompra.total" label="Total"></v-text-field>
             </v-col>
           </v-row>
         </v-card-actions>
@@ -102,11 +102,11 @@
         <v-row>
           <v-col class="m-5" cols="12" md="12">
             <v-btn color="blueMinsal" class="white--text ma-1" rounded @click="savePath(true)"
-              :small="$vuetify.breakpoint.xs" :loading="loading_navigate">
+              :small="$vuetify.breakpoint.xs" :loading="loading_navigate" v-if="!$route.query.show">
               <v-icon left>mdi-content-save</v-icon>
               {{ !$route.params.id ? 'Crear' : 'Editar' }}
             </v-btn>
-            <v-btn :to="{ name: 'compras' }" rounded :small="$vuetify.breakpoint.xs">
+            <v-btn :to="{ name: 'servicios' }" rounded :small="$vuetify.breakpoint.xs">
               <v-icon left>mdi-arrow-left</v-icon>
               Regresar al listado
             </v-btn>
@@ -146,6 +146,7 @@ export default {
         compras_sujeto_excluido: 0,
         anticipo_uno_porciento_retenido: 0,
         gravado_importacion: 0,
+        total: 0,
       },
       cuentas: [
         { // iva credito fiscal
@@ -161,16 +162,57 @@ export default {
     loading_navigate: false,
     cuentasList: [],
     tipoContribuyentes: [],
-    emisionDocs : [],
+    emisionDocs: [],
     numericRules: [
       v => /^\d+(\.\d{1,2})?$/.test(v) || 'Este campo debe ser numérico',
     ],
+
+    // datoShow = { "fecha": "20/11/2023", ee:"Caja", "descripcion": "Servicio de funerarios", "persona": { "nombre": "Luis Rodríguez" }, "numero_documento": "001", "Cuenta": { "nombre": "Servicios fúnebres", "contra:":"Inventario","e":"Comprobante crédito fiscal" }, "gravadas_locales": 1500, "gravadas_exportacion": 0, "exentas": 0, "no_sujetas": 0, "anticipo": 15 }],
+    datoShow : {
+      fecha_emision: '20/11/2023',
+      descripcion: 'Servicios funerarios',
+      numero_documento_cff: '001',
+      es_sujeto_excluido: false,
+      id_tipo_contribuyente: 2,
+      id_cuenta_contable: 38,
+      id_cuenta_contrapartida: 1 ,
+      id_tipo_emision_documento: 1,
+      persona: {
+        nit: 8888888888,
+        nombre: 'Luis Rodríguez',
+        nrc: 8888888888,
+      },
+      detalleCompra: {
+        gravado_interno: 1500,
+        exento_interno: 0,
+        exento_importacion: 0,
+        compras_sujeto_excluido: 0,
+        anticipo_uno_porciento_retenido: 15,
+        gravado_importacion: 0,
+        total: 1680,
+      },
+
+      cuentas: [
+        { // iva credito fiscal
+          id_cuenta: 6,
+          debe: 0,
+          haber: 195
+        }
+        // cuenta contable
+      ],
+    }
+
   }),
 
   created() {
     this.getCuentas()
     this.getTipoContribuyentes()
     this.getTipoEmisionDocumento()
+
+    // si trae el query show, es porque se quiere ver el detalle de un registro, datoShow
+    if (this.$route.query.show) {
+      this.form = this.datoShow
+    }
   },
 
   computed: {
