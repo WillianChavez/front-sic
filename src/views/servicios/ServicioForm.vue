@@ -3,7 +3,7 @@
     <v-flex xs12 sm11 md10 lg9>
       <v-card class="pa-2 pa-sm-4" rounded="lg">
         <v-card-title primary-title class="d-flex justify-space-between blueGrayPrincipal--text">
-          Servicio
+          {{ !$route.query.id ? 'Crear' : 'Editar' }} Servicio
         </v-card-title>
         <v-card-text>
 
@@ -57,6 +57,7 @@ export default {
       costo: null,
       descripcion: null,
     },
+    editMode: false,
     loading: false,
     loading_navigate: false,
     tipoServicios: [],
@@ -146,6 +147,7 @@ export default {
     // verificar si hay un id en la url query
     const id = this.$route.query.id
     if (id) {
+      this.editMode = true
       const servicio = this.getServicio(id)
       this.form = {
         nombre: servicio.nombre,
@@ -154,6 +156,10 @@ export default {
         costo: servicio.costo,
         descripcion: servicio.descripcion,
       }
+
+    } else{
+      this.formClean()
+      this.editMode = false
     }
   },
 };

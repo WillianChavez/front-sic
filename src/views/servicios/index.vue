@@ -13,7 +13,7 @@
         </v-card-title>
         <v-card-text>
           <v-skeleton-loader v-if="loading"></v-skeleton-loader>
-          <v-data-table :headers="headers" :items="data" item-key="id" class="elevation-0 border-1"
+          <v-data-table :headers="headers" :items="servicios" item-key="id" class="elevation-0 border-1"
             no-data-text="No hay datos" no-results-text="No hay resultados" disable-pagination hide-default-footer
             v-else>
             <template v-slot:[`item.mostrar`]="{ item }">
@@ -25,7 +25,7 @@
               </v-chip>
             </template>
             <template v-slot:[`item.accion`]="{ item }">
-              <v-btn icon small :to="`/servicios/form/${item.id}`">
+              <v-btn icon small :to="`/servicios/form?id=${item.id}`">
                 <v-icon>mdi-pencil</v-icon>
               </v-btn>
               <v-btn icon small @click="deleteServicio(item.id)">
@@ -55,6 +55,7 @@ import { mapActions } from "vuex";
 export default {
   data: () => ({
     loading: false,
+    servicios: [{ nombre: "Servicio 1", tipo_servicio: { nombre: "Tipo 1" }, precio_base: 100, costo: 50, descripcion: "Descripcion 1", id: 1 }],
     headers: [
       {
         text: "Nombre",
@@ -99,7 +100,7 @@ export default {
         per_page: this.per_page
       })
       const { page, per_page, total_rows } = this.getPaginationProperties(response)
-      this.compras = response.data;
+      this.servicios = response.data;
       this.page = page;
       this.per_page = per_page;
       this.total_rows = total_rows;
