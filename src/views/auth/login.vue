@@ -1,5 +1,5 @@
 <template>
-  <v-app class="bgMinsal">
+  <v-app class="bgPrincipal">
     <v-main>
       <v-container fluid fill-height>
         <v-layout justify-center>
@@ -10,7 +10,7 @@
                 max-width="350"
             />
             <v-card class="pa-2 pa-sm-10 mt-5" rounded="lg" :elevation="5">
-              <p class="text-h5 text-center pt-5 blueGrayMinsal--text">
+              <p class="text-h5 text-center pt-5 blueGrayPrincipal--text">
                 Inicie sesión para continuar
               </p>
               <v-form @submit.prevent="login()">
@@ -52,7 +52,7 @@
                       class="flex justify-center text-center"
                   >
                     <v-btn
-                        color="blueMinsal white--text px-sm-8"
+                        color="bluePrincipal white--text px-sm-8"
                         rounded
                         :loading="loading"
                         type="submit">iniciar sesión
@@ -64,7 +64,7 @@
                   <!-- <v-btn
                       text
                       style="text-transform: none"
-                      color="blueMinsal"
+                      color="bluePrincipal"
                       class="mt-2 mx-auto"
                       rounded
                       :to="{name:'forgot-password'}"
@@ -78,7 +78,7 @@
       </v-container>
     </v-main>
     <v-spacer class="my-10"></v-spacer>
-    <v-footer class="text-center blueDarkMinsal py-3">
+    <v-footer class="text-center blueDarkPrincipal py-3">
       <v-row>
         <v-col cols="12" sm="6" md="4">
         </v-col>

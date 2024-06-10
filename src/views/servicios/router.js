@@ -5,14 +5,14 @@ export default [
         component: () =>
             import(
                 /* webpackChunkName: "servicios" */ "./index.vue"
-                ),
+            ),
     },
     {
-        path: "/servicios/crear",
-        name: "servicios-crear",
+        path: "/servicios/form",
+        name: "servicios-form",
         component: () =>
             import(
                 /* webpackChunkName: "servicios" */ "./ServicioForm.vue"
-                ),
+            ),
     },
 ]

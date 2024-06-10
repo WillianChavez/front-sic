@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-main class="bgMinsal">
+    <v-main class="bgPrincipal">
       <v-container fill-height justify-center fluid>
         <v-flex xs12 sm8 md6 lg4 xl3>
           <v-card class="rounded-lg px-2 px-sm-12 elevation-2">
@@ -67,7 +67,7 @@
             </v-card-text>
             <v-card-actions class="justify-space-around pb-5" width="100%">
               <v-btn
-                  color="blueMinsal white--text"
+                  color="bluePrincipal white--text"
                   :loading="loading"
                   @click="changePassword"
                   rounded
@@ -76,7 +76,7 @@
                 actualizar
               </v-btn>
               <v-divider vertical></v-divider>
-              <router-link :to="{name:'login'}" class="blueMinsal--text"
+              <router-link :to="{name:'login'}" class="bluePrincipal--text"
               >Ir al login
               </router-link
               >

@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-spacer class="my-14"></v-spacer>
-    <v-bottom-navigation background-color="blueDarkMinsal" fixed>
+    <v-bottom-navigation background-color="blueDarkPrincipal" fixed>
       <div class="d-inline-flex overflow-x-auto bottom">
         <v-btn
           value="recent"

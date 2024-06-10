@@ -1,10 +1,10 @@
 <template>
   <v-app>
-    <v-main class="bgMinsal">
+    <v-main class="bgPrincipal">
       <v-container fill-height justify-center fluid>
         <v-flex xs12 sm8 md6 lg4 xl3>
           <v-card class="rounded-lg px-2 px-sm-10 elevation-3">
-            <v-card-title class="justify-center blueGrayMinsal--text"
+            <v-card-title class="justify-center blueGrayPrincipal--text"
             >Recuperar Contraseña
             </v-card-title
             >
@@ -18,7 +18,7 @@
                   name="email"
                   label="Email"
                   type="text"
-                  color="blueMinsal"
+                  color="bluePrincipal"
                   :error-messages="emailErrors"
                   @blur="$v.email.$touch()"
                   v-model="email"
@@ -38,7 +38,7 @@
             </v-card-text>
             <v-card-actions class="justify-space-around pb-5" width="100%">
               <v-btn
-                  class="blueMinsal white--text"
+                  class="bluePrincipal white--text"
                   rounded
                   :loading="loading"
                   @click="sendEmail"
@@ -48,7 +48,7 @@
               <v-divider vertical></v-divider>
               <v-btn
                   to="/login"
-                  class="blueMinsal--text"
+                  class="bluePrincipal--text"
                   rounded
                   text
                   style="text-transform: none"

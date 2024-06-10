@@ -2,10 +2,10 @@
   <v-container class="pa-0 pa-sm-2 justify-center d-flex" fill-height fluid>
     <v-flex xs12 sm11 md11 lg10>
       <v-card class="pa-4" rounded="lg">
-        <v-card-title primary-title class="d-flex justify-space-between blueGrayMinsal--text">
+        <v-card-title primary-title class="d-flex justify-space-between blueGrayPrincipal--text">
           Compras
           <div>
-            <v-btn rounded color="blueMinsal" class="white--text ma-1" :to="{ name: 'compras-crear' }">
+            <v-btn rounded color="bluePrincipal" class="white--text ma-1" :to="{ name: 'compras-crear' }">
               <v-icon left>mdi-plus</v-icon>
               Agregar
             </v-btn>
@@ -16,7 +16,7 @@
           <v-data-table :headers="headers" :items="data" item-key="id" class="elevation-0 border-1"
             no-data-text="No hay datos" no-results-text="No hay resultados" disable-pagination hide-default-footer v-else>
             <template v-slot:[`item.mostrar`]="{ item }">
-              <v-chip class="ma-2 white--text" color="blueMinsal" small v-if="item.mostrar">
+              <v-chip class="ma-2 white--text" color="bluePrincipal" small v-if="item.mostrar">
                 Si
               </v-chip>
               <v-chip class="ma-2 white--text" color="red darken-1" v-else small>

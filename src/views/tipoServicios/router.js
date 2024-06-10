@@ -1,7 +1,7 @@
 export default [
     {
-        path: "/cuentas",
-        name: "cuentas",
+        path: "/tipo-servicios",
+        name: "tipo-servicios",
         component: () =>
             import(
                 /* webpackChunkName: "cuentas" */ "./index.vue"

@@ -4,7 +4,7 @@
       <v-card class="pa-4" rounded="lg">
         <v-card-title
             primary-title
-            class="d-flex justify-space-between blueGrayMinsal--text"
+            class="d-flex justify-space-between blueGrayPrincipal--text"
         >
           Usuarios
         </v-card-title>
@@ -14,7 +14,7 @@
               label="Correo"
               type="search" :error-messages="emailErrors" @blur="$v.user.email.$touch()"
               autocomplete="username"
-              color="blueMinsal"
+              color="bluePrincipal"
               v-model="user.email"
           ></v-text-field>
           <v-row>
@@ -37,7 +37,7 @@
           <v-row class="pa-0 ma-0">
             <v-col class="pa-0">
               <v-btn
-                  color="blueMinsal"
+                  color="bluePrincipal"
                   class="white--text ma-1"
                   rounded
                   @click="saveUser()"

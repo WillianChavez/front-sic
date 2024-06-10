@@ -11,7 +11,7 @@
               Hay un problema | 404 Page Not Found
             </p>
             <v-btn
-              color="blueMinsal"
+              color="bluePrincipal"
               class="mt-8"
               rounded
               @click="ejecutarMover()"

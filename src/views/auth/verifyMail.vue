@@ -21,11 +21,11 @@
             <v-progress-circular
               v-if="loading"
               indeterminate
-              color="blueMinsal"
+              color="bluePrincipal"
               class="d-flex mx-auto"
             ></v-progress-circular>
             <v-btn
-              color="blueMinsal"
+              color="bluePrincipal"
               class="mt-8"
               rounded
               :to="{name:'login'}"

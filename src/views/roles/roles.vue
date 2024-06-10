@@ -13,7 +13,7 @@
             <v-col class="text-right">
               <v-btn v-if="hasRole('ROLE_ADMIN_ROLE_CREATE')"
                   rounded
-                  color="blueMinsal"
+                  color="bluePrincipal"
                   class="white--text ma-1"
                   @click="formClean(); showModal=true"
               >
@@ -46,7 +46,7 @@
             </template>
           </v-data-table>
           <v-alert
-              color="blueMinsal"
+              color="bluePrincipal"
               icon="mdi-information"
               prominent
               text
