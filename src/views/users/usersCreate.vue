@@ -2,15 +2,15 @@
   <v-container class="pa-0 pa-sm-2 justify-center d-flex" fill-height fluid>
     <v-flex xs12 sm11 md10 lg9>
       <v-card class="pa-2 pa-sm-4" rounded="lg">
-        <v-card-title primary-title class="d-flex justify-space-between blueGrayMinsal--text">
+        <v-card-title primary-title class="d-flex justify-space-between blueGrayPrincipal--text">
           Usuarios
         </v-card-title>
         <v-card-text>
           <div class="mb-6">
-            <v-text-field label="Correo" type="search" autocomplete="username" color="blueMinsal"
+            <v-text-field label="Correo" type="search" autocomplete="username" color="bluePrincipal"
                           v-model="form.email" :error-messages="emailErrors" @blur="$v.form.email.$touch()">
             </v-text-field>
-            <v-text-field label="Contraseña" color="blueMinsal" :type="showPassword?'text':'password'"
+            <v-text-field label="Contraseña" color="bluePrincipal" :type="showPassword?'text':'password'"
                           autocomplete="new-password"
                           v-model="form.password" :error-messages="passwordErrors" placeholder="******"
                           @blur="$v.form.password.$touch()">
@@ -24,7 +24,7 @@
                 </v-icon>
               </template>
             </v-text-field>
-            <v-text-field label="Confirmar contraseña" color="blueMinsal" :type="showConfirmPassword?'text':'password'"
+            <v-text-field label="Confirmar contraseña" color="bluePrincipal" :type="showConfirmPassword?'text':'password'"
                           autocomplete="new-password"
                           @blur="$v.form.confirm_password.$touch()"
                           v-model="form.confirm_password" :error-messages="confirmPasswordErrors"
@@ -60,12 +60,12 @@
         <v-card-actions>
           <v-row class="pa-0 ma-0">
             <v-col class="pa-0">
-              <v-btn color="blueMinsal" class="white--text ma-1" :loading="loading" rounded @click="createUser(true)"
+              <v-btn color="bluePrincipal" class="white--text ma-1" :loading="loading" rounded @click="createUser(true)"
                      :small="$vuetify.breakpoint.xs">
                 <v-icon left>mdi-content-save</v-icon>
                 Crear y regresar al listado
               </v-btn>
-              <v-btn color="blueMinsal" class="white--text ma-1" :small="$vuetify.breakpoint.xs" rounded
+              <v-btn color="bluePrincipal" class="white--text ma-1" :small="$vuetify.breakpoint.xs" rounded
                      @click="createUser()" :loading="loadingAnother">
                 <v-icon left>mdi-content-save-all</v-icon>
                 Crear y agregar otro

@@ -4,13 +4,13 @@
       <v-card class="pa-4" rounded="lg">
         <v-card-title
             primary-title
-            class="d-flex justify-space-between blueGrayMinsal--text"
+            class="d-flex justify-space-between blueGrayPrincipal--text"
         >
           Rutas
           <div>
             <v-btn
                 rounded
-                color="blueMinsal"
+                color="bluePrincipal"
                 class="white--text ma-1"
                 :to="{name:'pathsCreate'}"
                 v-if="hasRole('ROLE_ADMIN_PATH_CREATE')">
@@ -34,7 +34,7 @@
               v-else
           >
             <template v-slot:[`item.mostrar`]="{ item }">
-              <v-chip class="ma-2 white--text" color="blueMinsal" small v-if="item.mostrar">
+              <v-chip class="ma-2 white--text" color="bluePrincipal" small v-if="item.mostrar">
                 Si
               </v-chip>
               <v-chip class="ma-2 white--text" color="red darken-1" v-else small>
@@ -50,7 +50,7 @@
               </v-tooltip>
             </template>
             <template v-slot:[`item.publico`]="{ item }">
-              <v-chip class="ma-2 white--text" color="blueMinsal" small v-if="item.publico">
+              <v-chip class="ma-2 white--text" color="bluePrincipal" small v-if="item.publico">
                 Si
               </v-chip>
               <v-chip class="ma-2 white--text" color="red darken-1" v-else small>
@@ -58,7 +58,7 @@
               </v-chip>
             </template>
             <template v-slot:[`item.admin`]="{ item }">
-              <v-chip class="ma-2 white--text" color="blueMinsal" small v-if="item.admin">
+              <v-chip class="ma-2 white--text" color="bluePrincipal" small v-if="item.admin">
                 Si
               </v-chip>
               <v-chip class="ma-2 white--text" color="red darken-1" v-else small>

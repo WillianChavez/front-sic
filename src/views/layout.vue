@@ -5,7 +5,7 @@
     <app-header></app-header>
     <app-aside-bar :menu="menu"
     ></app-aside-bar>
-    <v-main class="bgMinsal">
+    <v-main class="bgPrincipal">
       <div class="pa-2 pa-sm-4" v-if="userInfo.user">
         <router-view :key="$route.fullPath" />
       </div>

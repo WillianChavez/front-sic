@@ -4,7 +4,7 @@
       <v-card class="pa-2 pa-sm-4" rounded="lg">
         <v-card-title
             primary-title
-            class="d-flex justify-space-between blueGrayMinsal--text"
+            class="d-flex justify-space-between blueGrayPrincipal--text"
         >
           Rutas
         </v-card-title>
@@ -14,28 +14,28 @@
 
               <v-text-field
                   label="Nombre" @blur="$v.form.name.$touch()"
-                  color="blueMinsal" :error-messages="nameErrors"
+                  color="bluePrincipal" :error-messages="nameErrors"
                   v-model="form.name"
               ></v-text-field>
               <v-text-field
                   label="URI" @blur="$v.form.url.$touch()"
-                  color="blueMinsal" :error-messages="urlErrors"
+                  color="bluePrincipal" :error-messages="urlErrors"
                   v-model="form.url"
               ></v-text-field>
               <v-text-field
                   label="Nombre URI" @blur="$v.form.name_url.$touch()"
-                  color="blueMinsal" :error-messages="urlNameErrors"
+                  color="bluePrincipal" :error-messages="urlNameErrors"
                   v-model="form.name_url"
               ></v-text-field>
               <v-text-field
                   label="Icono"
                   :append-icon="form.icon"
-                  color="blueMinsal"
+                  color="bluePrincipal"
                   v-model="form.icon"
               ></v-text-field>
               <v-text-field
                   label="Orden"
-                  color="blueMinsal"
+                  color="bluePrincipal"
                   v-model.number="form.order"
               ></v-text-field>
               <v-autocomplete v-model="form.id_ruta_padre" :items="paths" item-text="nombre" item-value="id"
@@ -44,19 +44,19 @@
                   label="Mostrar"
                   v-model="form.show"
                   class="d-inline-flex"
-                  color="blueMinsal"
+                  color="bluePrincipal"
               ></v-checkbox>
               <v-checkbox
                   label="Publico"
                   v-model="form.public"
                   class="d-inline-flex ml-2"
-                  color="blueMinsal"
+                  color="bluePrincipal"
               ></v-checkbox>
               <v-checkbox
                   label="Admin"
                   v-model="form.admin"
                   class="d-inline-flex ml-2"
-                  color="blueMinsal"
+                  color="bluePrincipal"
               ></v-checkbox>
             </v-col>
             <v-col cols="12" md="6">
@@ -69,7 +69,7 @@
           <v-row class="pa-0 ma-0">
             <v-col class="pa-0">
               <v-btn
-                  color="blueMinsal"
+                  color="bluePrincipal"
                   class="white--text ma-1"
                   rounded
                   @click="savePath(true)"
@@ -81,7 +81,7 @@
               </v-btn
               >
               <v-btn v-if="!$route.params.id"
-                     color="blueMinsal"
+                     color="bluePrincipal"
                      class="white--text ma-1"
                      :small="$vuetify.breakpoint.xs"
                      rounded :loading="loading"

@@ -16,7 +16,7 @@
         </v-card-title>
       </v-card>
       <v-list-item v-else style="height: 10rem; display: flex; justify-content: center;">
-        <v-btn text icon x-large color="blueMinsal"
+        <v-btn text icon x-large color="bluePrincipal"
         >
 
           <img
@@ -33,17 +33,17 @@
       <span v-for="(item, i) in menu"
             :key="i">
 
-        <v-list-group active-class="blueMinsal--text" v-if="item.childrens && item.childrens.length">
+        <v-list-group active-class="bluePrincipal--text" v-if="item.childrens && item.childrens.length">
         <template v-slot:activator>
           <v-list-item-title class="text-capitalize">
             {{ item.nombre }}
           </v-list-item-title>
         </template>
         <template #prependIcon>
-          <v-icon color="blueMinsal">{{ item.icono }}</v-icon>
+          <v-icon color="bluePrincipal">{{ item.icono }}</v-icon>
         </template>
           <div>
-            <v-list-item v-for="(child, j) in item.childrens" :key="j" :to="child.uri" active-class="blueMinsal--text">
+            <v-list-item v-for="(child, j) in item.childrens" :key="j" :to="child.uri" active-class="bluePrincipal--text">
               <v-list-item-icon>
                 <v-icon>{{ child.icono }}</v-icon>
               </v-list-item-icon>
@@ -54,8 +54,8 @@
           </div>
       </v-list-group>
         <v-list-item v-else :to="item.uri"
-                     active-class=" blueMinsal--text">
-          <v-tooltip right :disabled="!sideBar" color="blueMinsal">
+                     active-class=" bluePrincipal--text">
+          <v-tooltip right :disabled="!sideBar" color="bluePrincipal">
             <template v-slot:activator="{ on, attrs }">
               <v-list-item-icon v-bind="attrs" v-on="on">
                 <v-icon>{{ item.icono }}</v-icon>

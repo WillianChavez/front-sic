@@ -4,7 +4,7 @@
       <v-row class="pa-0 ma-0">
         <v-col cols="12" md="6" class="pt-0 px-0 px-sm-2">
           <v-card class="pa-4 pa-sm-8" elevation="3" rounded="lg">
-            <p class="text-h5 text-center blueGrayMinsal--text">
+            <p class="text-h5 text-center blueGrayPrincipal--text">
               Datos de perfil
             </p>
             <v-row>
@@ -21,7 +21,7 @@
               </v-text-field>
               <div class="text-center">
                 <v-btn
-                    color="blueMinsal white--text"
+                    color="bluePrincipal white--text"
                     rounded @click="validateUserByChangeEmail()"
                 >
                   <v-icon class="mr-1">mdi-content-save</v-icon>
@@ -33,7 +33,7 @@
         </v-col>
         <v-col cols="12" md="6" class="pb-0 px-0 px-sm-2">
           <v-card class="pa-4 pa-sm-8" elevation="3" rounded="lg">
-            <p class="text-h5 text-center blueGrayMinsal--text">
+            <p class="text-h5 text-center blueGrayPrincipal--text">
               Actualizar contraseña
             </p>
             <v-form @submit.prevent="changePassword()">
@@ -86,7 +86,7 @@
               </v-text-field>
               <v-card-actions class="flex justify-center pa-0">
                 <div class="text-center">
-                  <v-btn color="blueMinsal white--text" rounded type="submit" :loading="loadin_change_password">
+                  <v-btn color="bluePrincipal white--text" rounded type="submit" :loading="loadin_change_password">
                     <v-icon class="mr-1">mdi-content-save</v-icon>
                     Guardar
                   </v-btn>
@@ -125,7 +125,7 @@
         <v-card-actions class="pb-4">
           <v-btn
               rounded
-              color="blueMinsal"
+              color="bluePrincipal"
               class="white--text"
               :loading="loadin_change_email"
               @click="changeEmail()"

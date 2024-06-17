@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <app-loader v-if="loader"></app-loader>
-    <v-main class="bgMinsal">
+    <v-main class="bgPrincipal">
       <v-container fluid class="mb-5 mb-sm-16">
         <v-layout justify-center>
           <v-flex xs12 sm8 md6 lg4>
@@ -49,7 +49,7 @@
                       label="Codigo"
                       v-model="form.code" :error-messages="codeErrors" @blur="$v.form.code.$touch()"
                       type="text"
-                      color="blueMinsal"
+                      color="bluePrincipal"
                       v-mask="'######'"
                       @keypress.enter="VerifyCode2fa"
                   ></v-text-field>
@@ -58,7 +58,7 @@
               <v-card-actions class="py-0" v-if="form.id_method">
                 <v-row class="my-2 my-xs-0">
                   <v-btn
-                      color="blueMinsal white--text elevation-0 ma-1"
+                      color="bluePrincipal white--text elevation-0 ma-1"
                       rounded
                       @click="VerifyCode2fa"
                   >
@@ -66,7 +66,7 @@
                   </v-btn>
                   <v-btn
                       class="d-xs-flex ma-1"
-                      color="blueMinsal elevation-0 "
+                      color="bluePrincipal elevation-0 "
                       rounded
                       text
                       v-if="methods.length > 1"
@@ -81,11 +81,11 @@
         </v-layout>
       </v-container>
     </v-main>
-    <v-footer class="text-center blueDarkMinsal pa-3 absolute">
+    <v-footer class="text-center blueDarkPrincipal pa-3 absolute">
       <v-row>
         <v-col cols="12" sm="6" md="4">
           <v-img
-              src="@/assets/img/escudo-white-minsal.png"
+              src="@/assets/img/escudo-white-Principal.png"
               width="200"
               class="mx-auto"
           />

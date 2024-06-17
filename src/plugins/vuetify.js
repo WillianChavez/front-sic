@@ -10,18 +10,18 @@ export default new Vuetify({
         themes: {
             //Se definen colores globales para el tema claro
             light : {
-                blueMinsal:'#175EFB',   
-                blueGrayMinsal:'#6A83BE',   
-                blueDarkMinsal:'#090A0D',
-                bgMinsal:'#F4F7FD',
+                bluePrincipal:'#175EFB',   
+                blueGrayPrincipal:'#6A83BE',   
+                blueDarkPrincipal:'#090A0D',
+                bgPrincipal:'#F4F7FD',
                 bgWhite:"#FFFFFF",
                 primary: '#175EFB',
             },
             dark:{
-                bgMinsal:'#2f3032',
-                blueMinsal:'#175EFB',   
-                blueGrayMinsal:'#6A83BE',   
-                blueDarkMinsal:'#090A0D',
+                bgPrincipal:'#2f3032',
+                bluePrincipal:'#175EFB',   
+                blueGrayPrincipal:'#6A83BE',   
+                blueDarkPrincipal:'#090A0D',
                 primary: '#175EFB'
                 // primary: {
                 //     base: colors.purple.base,

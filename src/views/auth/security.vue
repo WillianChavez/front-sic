@@ -6,7 +6,7 @@
         <v-card class="pa-0 pa-sm-8 pb-sm-0" elevation="3" rounded="lg">
           <v-card-title
               primary-title
-              class="text-h5 text-center blueGrayMinsal--text d-block"
+              class="text-h5 text-center blueGrayPrincipal--text d-block"
           >Metodos de autenticación
           </v-card-title
           >
@@ -23,7 +23,7 @@
                   @click="store2FAMethods(item.id)"
               >
                 <v-list-item-avatar>
-                  <v-icon :class=" item.is_primary == true || item.is_primary == false ? 'blueMinsal' : 'grey'" dark>
+                  <v-icon :class=" item.is_primary == true || item.is_primary == false ? 'bluePrincipal' : 'grey'" dark>
                     {{ item.icono }}
                   </v-icon>
                 </v-list-item-avatar>
@@ -67,7 +67,7 @@
               <v-stepper-step
                   step="1"
                   :complete="step > 1"
-                  color="blueMinsal"
+                  color="bluePrincipal"
                   class="text-center"
               >
                 Escanee el codigo QR
@@ -75,7 +75,7 @@
 
               <v-divider></v-divider>
 
-              <v-stepper-step step="2" color="blueMinsal">
+              <v-stepper-step step="2" color="bluePrincipal">
                 Ingrese el codigo
               </v-stepper-step>
             </v-stepper-header>
@@ -131,7 +131,7 @@
               <v-btn
                   color="primary"
                   rounded
-                  class="blueMinsal white--text"
+                  class="bluePrincipal white--text"
                   @click="step = 2"
               >
                 Continuar
@@ -142,7 +142,7 @@
                   placeholder="Codigo"
                   label="Ingrese Codigo"
                   v-model="code"
-                  color="blueMinsal"
+                  color="bluePrincipal"
                   :error-messages="codeErrors"
                   @blur="$v.code.$touch()"
                   @keypress.enter="authMethodVerification()"
@@ -158,7 +158,7 @@
                 Regresar
               </v-btn>
               <v-btn
-                  color="blueMinsal white--text elevation-0"
+                  color="bluePrincipal white--text elevation-0"
                   rounded
                   @click="authMethodVerification()"
               >

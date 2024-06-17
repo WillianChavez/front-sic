@@ -4,13 +4,13 @@
       <v-card class="pa-4" rounded="lg">
         <v-card-title
             primary-title
-            class="d-flex justify-space-between blueGrayMinsal--text"
+            class="d-flex justify-space-between blueGrayPrincipal--text"
         >
           Perfiles
           <div>
             <v-btn
                 rounded
-                color="blueMinsal"
+                color="bluePrincipal"
                 class="white--text ma-1"
                 :to="{name:'profilesCreate'}"
                 v-if="hasRole('ROLE_ADMIN_PROFILE_CREATE')"

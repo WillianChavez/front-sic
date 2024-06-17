@@ -4,7 +4,7 @@
       <v-card class="pa-2 pa-sm-4" rounded="lg">
         <v-card-title
             primary-title
-            class="d-flex justify-space-between blueGrayMinsal--text"
+            class="d-flex justify-space-between blueGrayPrincipal--text"
         >
           Perfiles
         </v-card-title>
@@ -13,13 +13,13 @@
             <v-card-text>
               <v-text-field
                   label="Nombre" :error-messages="nameErrors"
-                  color="blueMinsal"
+                  color="bluePrincipal"
                   @blur="$v.form.name.$touch()"
                   v-model="form.name"
               ></v-text-field>
               <v-text-field
                   label="Código"
-                  color="blueMinsal"
+                  color="bluePrincipal"
                   v-model="form.code"
               ></v-text-field>
             </v-card-text>
@@ -32,12 +32,12 @@
         <v-card-actions>
           <v-row class="pa-0 ma-0">
             <v-col class="pa-0">
-              <v-btn color="blueMinsal" class="white--text ma-1" rounded @click="saveProfile(true)">
+              <v-btn color="bluePrincipal" class="white--text ma-1" rounded @click="saveProfile(true)">
                 <v-icon left>mdi-content-save</v-icon>
                 {{!$route.params.id?'Crear':'Editar'}} y regresar al listado
               </v-btn
               >
-              <v-btn color="blueMinsal" class="white--text ma-1" :small="$vuetify.breakpoint.xs" rounded
+              <v-btn color="bluePrincipal" class="white--text ma-1" :small="$vuetify.breakpoint.xs" rounded
                      @click="saveProfile()" v-if="!$route.params.id">
                 <v-icon left>mdi-content-save-all</v-icon>
                 Crear y agregar otro

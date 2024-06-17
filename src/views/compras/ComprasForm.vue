@@ -2,7 +2,7 @@
   <v-container class="pa-0 pa-sm-2 justify-center d-flex" fill-height fluid>
     <v-flex xs12 sm11 md10 lg9>
       <v-card class="pa-2 pa-sm-4" rounded="lg">
-        <v-card-title primary-title class="d-flex justify-space-between blueGrayMinsal--text">
+        <v-card-title primary-title class="d-flex justify-space-between blueGrayPrincipal--text">
           Compra
         </v-card-title>
         <v-card-text>
@@ -57,7 +57,7 @@
           </v-row>
         </v-card-text>
 
-        <h1 class="text-h6 blueGrayMinsal--text">Detalle de compra</h1>
+        <h1 class="text-h6 blueGrayPrincipal--text">Detalle de compra</h1>
         <v-card-actions>
           <v-row class="pa-0 ma-0">
             <v-col class="pa-0" cols="12" md="8">
@@ -85,8 +85,8 @@
                 </v-card-text>
               </v-card>
             </v-col>
-            <v-col class="pa-5 rounded bgMinsal px-5" cols="12" md="4">
-              <v-text-field v-model="form.detalleCompra.anticipo_uno_porciento_retenido" label="Anticipo 1% percibido"
+            <v-col class="pa-5 rounded bgPrincipal px-5" cols="12" md="4">
+              <v-text-field v-model="form.detalleCompra.anticipo_uno_porciento_retenido" label="Anticipo 1% retenido"
                 readonly @blur="$v.form.detalleCompra.anticipo_uno_porciento_retenido.$touch()" required></v-text-field>
 
               <v-text-field label="IVA crédito fiscal" v-model="form.cuentas[0].haber" readonly></v-text-field>
@@ -98,7 +98,7 @@
 
         <v-row>
           <v-col class="m-5" cols="12" md="12">
-            <v-btn color="blueMinsal" class="white--text ma-1" rounded @click="savePath(true)"
+            <v-btn color="bluePrincipal" class="white--text ma-1" rounded @click="savePath(true)"
               :small="$vuetify.breakpoint.xs" :loading="loading_navigate">
               <v-icon left>mdi-content-save</v-icon>
               {{ !$route.params.id ? 'Crear' : 'Editar' }}

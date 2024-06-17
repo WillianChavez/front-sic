@@ -4,10 +4,10 @@ import rolesRouter from "../views/roles/rolesRouter";
 import profilesRouter from "../views/profiles/profilesRouter";
 import usersRouter from "../views/users/userRouter";
 import pathsRouter from "../views/paths/pathRouter";
-import cuentasRouter from "../views/cuentas/router";
 import comprasRouter from "../views/compras/router";
 import serviciosRouter from '../views/servicios/router';
 import reportesRouter from '../views/reportes/router';
+import tipoServiciosRouter from '../views/tipoServicios/router';
 
 Vue.use(VueRouter);
 
@@ -32,7 +32,7 @@ const routes = [
             ...profilesRouter,
             ...usersRouter,
             ...pathsRouter,
-            ...cuentasRouter,
+            ...tipoServiciosRouter,
             ...comprasRouter,
             ...serviciosRouter,
             ...reportesRouter,

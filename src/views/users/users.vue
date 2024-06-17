@@ -4,13 +4,13 @@
       <v-card class="pa-4" rounded="lg">
         <v-card-title
             primary-title
-            class="d-flex justify-space-between blueGrayMinsal--text"
+            class="d-flex justify-space-between blueGrayPrincipal--text"
         >
           Usuarios
           <div>
             <v-btn v-if="hasRole('ROLE_ADMIN_USER_CREATE')"
                 rounded
-                color="blueMinsal"
+                color="bluePrincipal"
                 class="white--text ma-1"
                 :to="{name:'usersCreate'}"
             >
@@ -38,7 +38,7 @@
             </template>
             <template #item.is_suspended="{ item }">
               <v-chip class="ma-2 white--text" color="red darken-1" small v-if="item.is_suspended">No</v-chip>
-              <v-chip class="ma-2 white--text" color="blueMinsal" v-else small>Si</v-chip>
+              <v-chip class="ma-2 white--text" color="bluePrincipal" v-else small>Si</v-chip>
             </template>
             <template v-slot:[`item.accion`]="{ item }">
               <v-btn icon small @click="showUsuarioData(item)">
@@ -82,7 +82,7 @@
           <v-spacer></v-spacer>
           <span class="font-weight-bold">Deshabilitado</span>
           <v-spacer></v-spacer>
-          <v-chip class="ma-2 white--text" color="blueMinsal" small
+          <v-chip class="ma-2 white--text" color="bluePrincipal" small
                   v-if="usuarioData ? usuarioData.is_suspended : false">Si
           </v-chip>
           <v-chip class="ma-2 white--text" color="red" v-else small>No</v-chip>
