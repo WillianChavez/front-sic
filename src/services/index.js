@@ -6,9 +6,9 @@ import profiles from './profiles.services'
 import typeRoles from './typeRoles.services'
 import paths from './path.services'
 import catalogo from './catalogo.services'
-import cuenta from './cuenta.services'
 import compra from './compra.services'
 import servicio from './servicio.services'
+import tiposervicio from "./tiposervicio.services";
 
 Vue.prototype.services = {
     auth,
@@ -18,7 +18,7 @@ Vue.prototype.services = {
     typeRoles,
     paths,
     catalogo,
-    cuenta,
     compra,
-    servicio
+    servicio,
+    tiposervicio,
 }
