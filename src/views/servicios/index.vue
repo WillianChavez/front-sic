@@ -55,7 +55,7 @@ import { mapActions } from "vuex";
 export default {
   data: () => ({
     loading: false,
-    servicios: [{ nombre: "Servicio 1", tipo_servicio: { nombre: "Tipo 1" }, precio_base: 100, costo: 50, descripcion: "Descripcion 1", id: 1 }],
+    servicios: [],
     headers: [
       {
         text: "Nombre",
@@ -65,7 +65,7 @@ export default {
       {
         text: "Tipo de Servicio",
         align: "start",
-        value: "tipo_servicio.nombre",
+        value: "TipoServicio.nombre",
       },
       {
         text: "Precio Base",
@@ -88,6 +88,7 @@ export default {
     page: 1,
     per_page: 10,
     total_rows: 0,
+    options: [{ value: 10, text: '10' }, { value: 25, text: '25' }, { value: 50, text: '50' }],
   }),
 
 
@@ -99,11 +100,9 @@ export default {
         page: this.page,
         per_page: this.per_page
       })
-      const { page, per_page, total_rows } = this.getPaginationProperties(response)
       this.servicios = response.data;
-      this.page = page;
-      this.per_page = per_page;
-      this.total_rows = total_rows;
+
+
       this.loading = false;
     },
     async deleteServicio(id) {
@@ -126,11 +125,11 @@ export default {
   watch: {
     per_page() {
       this.page = 1;
-      // this.getServicios()
+      this.getServicios()
     }
   },
   async created() {
-    // this.getServicios()
+    this.getServicios()
   },
 };
 </script>

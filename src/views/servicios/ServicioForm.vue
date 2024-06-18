@@ -13,8 +13,8 @@
           <v-text-field v-model="form.precio_base" label="Precio Base" :error-messages="descripcionErrors"
             @blur="$v.form.descripcion.$touch()" required></v-text-field>
 
-          <v-autocomplete v-model="form.id_tipo_servicio" :items="emisionDocs" item-text="nombre" item-value="id"
-            label="Tipo de servicio" :error-messages="cuentaContableErrors" @blur="$v.form.id_tipo_servicio.$touch()"
+          <v-autocomplete v-model="form.id_tipo_servicio" :items="tipoServicios" item-text="nombre" item-value="id"
+            label="Tipo de servicio" :error-messages="tipoServicioErrors" @blur="$v.form.id_tipo_servicio.$touch()"
             required></v-autocomplete>
           <v-text-field v-model="form.costo" label="Costo" :error-messages="descripcionErrors"
             @blur="$v.form.costo.$touch()" required></v-text-field>
@@ -29,7 +29,7 @@
             <v-btn color="bluePrincipal" class="white--text ma-1" rounded @click="save(true)"
               :small="$vuetify.breakpoint.xs" :loading="loading_navigate">
               <v-icon left>mdi-content-save</v-icon>
-              {{ !$route.params.id ? 'Crear' : 'Editar' }}
+              {{ !$route.query.id ? 'Crear' : 'Editar' }}
             </v-btn>
             <v-btn :to="{ name: 'servicios' }" rounded :small="$vuetify.breakpoint.xs">
               <v-icon left>mdi-arrow-left</v-icon>
@@ -132,23 +132,47 @@ export default {
       this.$v.$touch()
       if (this.$v.$invalid) return
       this.loading_navigate = true
-      if (this.$route.params.id) {
-        await this.services.servicio.updateServicio(this.$route.params.id, this.form)
-      } else {
-        await this.services.servicio.createServicio(this.form)
+      try {
+
+        if (this.$route.query.id) {
+          await this.services.servicio.updateServicio(this.$route.query.id, this.form)
+        } else {
+          await this.services.servicio.storeServicio(this.form)
+        }
+
+        this.formClean()
+        if (redirect) this.$router.push({ name: "servicios" })
+      } catch (error) {
+        console.log(error)
+
+      } finally {
+        this.loading_navigate = false
       }
-      this.loading_navigate = false
-      this.formClean()
-      if (redirect) this.$router.push({ name: "servicios" })
+    },
+
+
+    async getTiposServicios() {
+      this.loading = true;
+      const response = await this.services.tiposervicio.getAll()
+      this.tipoServicios = response.data;
+      this.loading = false;
+    },
+
+    async getServicio(id) {
+      this.loading = true;
+      const response = await this.services.servicio.getServicio(id)
+      this.loading = false;
+      return response.data
     },
   },
 
-  created() {
-    // verificar si hay un id en la url query
+  
+
+  async created() {
     const id = this.$route.query.id
     if (id) {
       this.editMode = true
-      const servicio = this.getServicio(id)
+      const servicio = await this.getServicio(id)
       this.form = {
         nombre: servicio.nombre,
         precio_base: servicio.precio_base,
@@ -157,9 +181,10 @@ export default {
         descripcion: servicio.descripcion,
       }
 
-    } else{
+    } else {
       this.formClean()
       this.editMode = false
+      await this.getTiposServicios()
     }
   },
 };
