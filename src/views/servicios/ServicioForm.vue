@@ -7,16 +7,16 @@
         </v-card-title>
         <v-card-text>
 
-          <v-text-field v-model="form.nombre" label="Nombre" :error-messages="descripcionErrors"
-            @blur="$v.form.descripcion.$touch()" required></v-text-field>
+          <v-text-field v-model="form.nombre" label="Nombre" :error-messages="nombreErrors"
+            @blur="$v.form.nombre.$touch()" required></v-text-field>
 
-          <v-text-field v-model="form.precio_base" label="Precio Base" :error-messages="descripcionErrors"
-            @blur="$v.form.descripcion.$touch()" required></v-text-field>
+          <v-text-field v-model="form.precio_base" label="Precio Base" :error-messages="precioBaseErrors"
+            @blur="$v.form.precio_base.$touch()" required></v-text-field>
 
           <v-autocomplete v-model="form.id_tipo_servicio" :items="tipoServicios" item-text="nombre" item-value="id"
             label="Tipo de servicio" :error-messages="tipoServicioErrors" @blur="$v.form.id_tipo_servicio.$touch()"
             required></v-autocomplete>
-          <v-text-field v-model="form.costo" label="Costo" :error-messages="descripcionErrors"
+          <v-text-field v-model="form.costo" label="Costo" :error-messages="costoErrors"
             @blur="$v.form.costo.$touch()" required></v-text-field>
 
           <v-textarea v-model="form.descripcion" label="Descripción" :error-messages="descripcionErrors"
@@ -78,6 +78,7 @@ export default {
       const errors = []
       if (!this.$v.form.precio_base.$dirty) return errors
       !this.$v.form.precio_base.required && errors.push('Precio Base es requerido')
+      !this.$v.form.precio_base.numeric && errors.push('Precio Base debe ser numérico')
       return errors
     },
 
@@ -92,6 +93,8 @@ export default {
       const errors = []
       if (!this.$v.form.costo.$dirty) return errors
       !this.$v.form.costo.required && errors.push('Costo es requerido')
+      !this.$v.form.costo.numeric && errors.push('Costo debe ser numérico')
+
       return errors
     },
 
