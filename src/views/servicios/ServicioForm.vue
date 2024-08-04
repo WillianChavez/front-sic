@@ -10,13 +10,13 @@
           <v-text-field v-model="form.nombre" label="Nombre" :error-messages="nombreErrors"
             @blur="$v.form.nombre.$touch()" required></v-text-field>
 
-          <v-text-field v-model="form.precio_base" label="Precio Base" :error-messages="precioBaseErrors"
+          <v-text-field v-model="form.precio_base" label="Precio Base ($)" :error-messages="precioBaseErrors"
             @blur="$v.form.precio_base.$touch()" required></v-text-field>
 
           <v-autocomplete v-model="form.id_tipo_servicio" :items="tipoServicios" item-text="nombre" item-value="id"
             label="Tipo de servicio" :error-messages="tipoServicioErrors" @blur="$v.form.id_tipo_servicio.$touch()"
             required></v-autocomplete>
-          <v-text-field v-model="form.costo" label="Costo" :error-messages="costoErrors"
+          <v-text-field v-model="form.costo" label="Costo ($)" :error-messages="costoErrors"
             @blur="$v.form.costo.$touch()" required></v-text-field>
 
           <v-textarea v-model="form.descripcion" label="Descripción" :error-messages="descripcionErrors"

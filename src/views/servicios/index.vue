@@ -68,12 +68,12 @@ export default {
         value: "TipoServicio.nombre",
       },
       {
-        text: "Precio Base",
+        text: "Precio Base ($)",
         align: "start",
         value: "precio_base",
       },
       {
-        text: "Costo",
+        text: "Costo ($)",
         align: "start",
         value: "costo",
       },
