@@ -8,6 +8,7 @@ import comprasRouter from "../views/compras/router";
 import serviciosRouter from '../views/servicios/router';
 import reportesRouter from '../views/reportes/router';
 import tipoServiciosRouter from '../views/tipoServicios/router';
+import clientesRouter from '../views/clientes/router';
 
 Vue.use(VueRouter);
 
@@ -36,6 +37,7 @@ const routes = [
             ...comprasRouter,
             ...serviciosRouter,
             ...reportesRouter,
+            ...clientesRouter,
             {
                 path: "/security",
                 name: "security",
