@@ -1,4 +1,4 @@
-import Vue from "vue";
+import Vue from 'vue'
 import auth from './auth.services'
 import users from './user.services'
 import roles from './roles.services'
@@ -8,17 +8,19 @@ import paths from './path.services'
 import catalogo from './catalogo.services'
 import compra from './compra.services'
 import servicio from './servicio.services'
-import tiposervicio from "./tiposervicio.services";
+import tiposervicio from './tiposervicio.services'
+import cliente from './cliente.services'
 
 Vue.prototype.services = {
-    auth,
-    users,
-    roles,
-    profiles,
-    typeRoles,
-    paths,
-    catalogo,
-    compra,
-    servicio,
-    tiposervicio,
+  auth,
+  users,
+  roles,
+  profiles,
+  typeRoles,
+  paths,
+  catalogo,
+  compra,
+  servicio,
+  tiposervicio,
+  cliente,
 }

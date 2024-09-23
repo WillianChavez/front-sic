@@ -86,7 +86,7 @@ export default {
     ...mapActions("utils", ["getMenu"]),
     async getClientes() {
       this.loading = true;
-      const response = await this.services.servicio.getClientes({
+      const response = await this.services.cliente.getClientes({
         page: this.page,
         per_page: this.per_page
       })
@@ -96,7 +96,7 @@ export default {
       this.loading = false;
     },
     async deleteCliente(id) {
-      const response = await this.services.servicio.deleteCliente(id)
+      const response = await this.services.cliente.deleteCliente(id)
       if (response.status === 200) {
         this.temporalAlert({
           show: true,
@@ -119,7 +119,7 @@ export default {
     }
   },
   async created() {
-    // this.getClientes()
+    this.getClientes()
   },
 };
 </script>
