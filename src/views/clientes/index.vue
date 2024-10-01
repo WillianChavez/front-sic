@@ -91,6 +91,7 @@ export default {
         per_page: this.per_page
       })
       this.clientes = response.data;
+      this.total_rows = response.data.length
 
 
       this.loading = false;
