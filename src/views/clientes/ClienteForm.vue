@@ -76,6 +76,7 @@ export default {
       const errors = []
       if (!this.$v.form.email.$dirty) return errors
       !this.$v.form.email.required && errors.push('Correo electrónico es requerido')
+      !this.$v.form.email.email && errors.push('Correo electrónico no es válido')
       return errors
     },
   },
@@ -108,14 +109,29 @@ export default {
 
         if (this.$route.query.id) {
           await this.services.cliente.updateCliente(this.$route.query.id, this.form)
+          this.temporalAlert({
+            show: true,
+            message: "Se ha actualizado el cliente",
+            type: "success",
+          });
         } else {
           await this.services.cliente.storeCliente(this.form)
-        }
 
+          this.temporalAlert({
+            show: true,
+            message: "Se ha creado el cliente",
+            type: "success",
+          });
+        }
         this.formClean()
         if (redirect) this.$router.push({ name: "clientes" })
       } catch (error) {
-        console.log(error)
+    console.log(error)
+        this.temporalAlert({
+          show: true,
+          message: error.response.data.err.description || "Ha ocurrido un error",
+          type: "error",
+        });
 
       } finally {
         this.loading_navigate = false
