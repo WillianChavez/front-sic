@@ -97,14 +97,11 @@ export default {
       this.loading = false;
     },
     async deleteCliente(id) {
-      const response = await this.services.cliente.deleteCliente(id)
-      if (response.status === 200) {
-        this.temporalAlert({
-          show: true,
-          message: 'Cliente eliminada con éxito',
-          type: "success",
-        });
-        this.getClientes()
+      const confirm = window.confirm("¿Está seguro de eliminar este cliente?");
+
+      if(confirm){
+        await this.services.cliente.deleteCliente(id);
+         await this.getClientes();
       }
     },
   },
