@@ -100,7 +100,7 @@ export default {
 
       if(confirm){
         await this.services.cliente.deleteCliente(id);
-        this.getClientes();
+         await this.getClientes();
       }
     },
   },
