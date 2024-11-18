@@ -10,6 +10,7 @@ import compra from './compra.services'
 import servicio from './servicio.services'
 import tiposervicio from './tiposervicio.services'
 import cliente from './cliente.services'
+import venta from './venta.services'
 
 Vue.prototype.services = {
   auth,
@@ -23,4 +24,5 @@ Vue.prototype.services = {
   servicio,
   tiposervicio,
   cliente,
+  venta
 }
