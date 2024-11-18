@@ -7,17 +7,11 @@
 
       <!-- // filtros de busqueda, por Fecha -->
       <v-card class="mt-6">
-        <v-card-title style="width: 290px;" >
+        <v-card-title style="width: 290px;">
           <v-menu offset-y ref="menu" transition="scale-transition" :close-on-content-click="false" max-width="290px">
             <template v-slot:activator="{ on, attrs }">
-              <v-text-field
-                v-model="search"
-                append-icon="mdi-calendar"
-                label="Buscar por fecha"
-                v-bind="attrs"
-                v-on="on"
-                max-width="290px"
-              ></v-text-field>
+              <v-text-field v-model="search" append-icon="mdi-calendar" label="Buscar por fecha" v-bind="attrs" v-on="on"
+                max-width="290px"></v-text-field>
             </template>
             <v-date-picker v-model="search" type="month" @input="$refs.menu.save(search)"></v-date-picker>
           </v-menu>
@@ -60,21 +54,48 @@
           <template v-slot:no-data>
             <v-btn color="primary" @click="initialize">No hay Información. Presione para recargar</v-btn>
           </template>
-
-          <template v-slot:footer>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>{{ totalExentas }}</td>
-            <td>{{ totalNoSujetas }}</td>
-            <td>{{ totalGravadasLocales }}</td>
-            <td>{{ totalDebitoFiscal }}</td>
-            <td>{{ totalIvaRetenido }}</td>
-            <td>{{ totalTotalVentas }}</td>
-          </template>
         </v-data-table>
+        Resumen
+
+        <div class="d-flex">
+
+          <v-list-item three-line>
+            <v-list-item-content>
+              <v-list-item-title>Total Exentas</v-list-item-title>
+              <v-list-item-subtitle>{{ totalExentas }}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item three-line>
+            <v-list-item-content>
+              <v-list-item-title>Total No Sujetas</v-list-item-title>
+              <v-list-item-subtitle>{{ totalNoSujetas }}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item three-line>
+            <v-list-item-content>
+              <v-list-item-title>Total Gravadas Locales</v-list-item-title>
+              <v-list-item-subtitle>{{ totalGravadasLocales }}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item three-line>
+            <v-list-item-content>
+              <v-list-item-title>Total Débito Fiscal</v-list-item-title>
+              <v-list-item-subtitle>{{ totalDebitoFiscal }}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item three-line>
+            <v-list-item-content>
+              <v-list-item-title>Total Iva Retenido</v-list-item-title>
+              <v-list-item-subtitle>{{ totalIvaRetenido }}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item three-line>
+            <v-list-item-content>
+              <v-list-item-title>Total Total Ventas</v-list-item-title>
+              <v-list-item-subtitle>{{ totalTotalVentas }}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </div>
       </v-card>
     </main>
   </v-container>
@@ -101,6 +122,69 @@ export default {
       { text: 'Iva retenido', value: 'ivaRetenido' },
       { text: 'Total de ventas', value: 'totalVentas' },
     ],
+
+    items: [
+      {
+        numero: 1,
+        fecha: '01/01/2023',
+        correlativo: 'CORR001',
+        nrc: 'NRC001',
+        nombre: 'Contribuyente A',
+        exentas: 100,
+        noSujetas: 50,
+        gravadasLocales: 200,
+        debitoFiscal: 150,
+        ivaRetenido: 20,
+        totalVentas: 470,
+      },
+      {
+        numero: 2,
+        fecha: '05/01/2023',
+        correlativo: 'CORR002',
+        nrc: 'NRC002',
+        nombre: 'Contribuyente B',
+        exentas: 120,
+        noSujetas: 30,
+        gravadasLocales: 180,
+        debitoFiscal: 100,
+        ivaRetenido: 15,
+        totalVentas: 445,
+      },
+      {
+        numero: 3,
+        fecha: '10/01/2023',
+        correlativo: 'CORR003',
+        nrc: 'NRC003',
+        nombre: 'Contribuyente C',
+        exentas: 80,
+        noSujetas: 20,
+        gravadasLocales: 150,
+        debitoFiscal: 120,
+        ivaRetenido: 25,
+        totalVentas: 395,
+      },
+    ],
   }),
+
+  computed: {
+    totalExentas() {
+      return this.items.reduce((total, item) => total + item.exentas, 0);
+    },
+    totalNoSujetas() {
+      return this.items.reduce((total, item) => total + item.noSujetas, 0);
+    },
+    totalGravadasLocales() {
+      return this.items.reduce((total, item) => total + item.gravadasLocales, 0);
+    },
+    totalDebitoFiscal() {
+      return this.items.reduce((total, item) => total + item.debitoFiscal, 0);
+    },
+    totalIvaRetenido() {
+      return this.items.reduce((total, item) => total + item.ivaRetenido, 0);
+    },
+    totalTotalVentas() {
+      return this.items.reduce((total, item) => total + item.totalVentas, 0);
+    },
+  },
 };
 </script>

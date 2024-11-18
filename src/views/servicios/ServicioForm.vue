@@ -64,6 +64,42 @@ export default {
     numericRules: [
       v => /^\d+(\.\d{1,2})?$/.test(v) || 'Este campo debe ser numérico',
     ],
+
+    // datoShow = { "fecha": "20/11/2023", ee:"Caja", "descripcion": "Servicio de funerarios", "persona": { "nombre": "Luis Rodríguez" }, "numero_documento": "001", "Cuenta": { "nombre": "Servicios fúnebres", "contra:":"Inventario","e":"Comprobante crédito fiscal" }, "gravadas_locales": 1500, "gravadas_exportacion": 0, "exentas": 0, "no_sujetas": 0, "anticipo": 15 }],
+    datoShow : {
+      fecha_emision: '20/11/2023',
+      descripcion: 'Servicios funerarios',
+      numero_documento_cff: '001',
+      es_sujeto_excluido: false,
+      id_tipo_contribuyente: 2,
+      id_cuenta_contable: 38,
+      id_cuenta_contrapartida: 1 ,
+      id_tipo_emision_documento: 1,
+      persona: {
+        nit: 8888888888,
+        nombre: 'Luis Rodríguez',
+        nrc: 8888888888,
+      },
+      detalleCompra: {
+        gravado_interno: 1500,
+        exento_interno: 0,
+        exento_importacion: 0,
+        compras_sujeto_excluido: 0,
+        anticipo_uno_porciento_retenido: 15,
+        gravado_importacion: 0,
+        total: 1680,
+      },
+
+      cuentas: [
+        { // iva credito fiscal
+          id_cuenta: 6,
+          debe: 0,
+          haber: 195
+        }
+        // cuenta contable
+      ],
+    }
+
   }),
 
   computed: {

@@ -91,8 +91,7 @@
 
               <v-text-field label="IVA crédito fiscal" v-model="form.cuentas[0].haber" readonly></v-text-field>
 
-              <v-text-field v-model="form.detalleCompra.total" label="Total" 
-                ></v-text-field>
+              <v-text-field v-model="form.detalleCompra.total" label="Total"></v-text-field>
             </v-col>
           </v-row>
         </v-card-actions>
@@ -148,12 +147,47 @@ export default {
         { // iva credito fiscal
           id_cuenta: 6,
           debe: 0,
-          haber : 0
+          haber: 0
         }
         // cuenta contable
       ],
 
     },
+
+    // data: [{ "fecha": "21/11/2023", ee: "Inventario" ,"Persona": { "nombre": "Carlos Sánchez" }, "descripcion": "Compra de Velas", "numero_documento": "002", "Cuenta": { "nombre": "Banco" }, "gravadas_internas": 200, "gravadas_importacion": 0, "exentas_internas": 0, "exentas_internacion": 0, "exentas_importacion": 0, "sujeto_excluido": 200 }],
+    datoShow: {
+      fecha_emision: '21/11/2023',
+      descripcion: 'Compra de velas',
+      numero_documento_cff: '002',
+      es_sujeto_excluido: false,
+      id_tipo_contribuyente: 3,
+      id_cuenta_contable: 2,
+      id_cuenta_contrapartida: 33,
+      persona: {
+        nit: 2342342323,
+        nombre: 'Carlos Sánchez',
+        nrc: 23423423,
+      },
+      detalleCompra: {
+        gravado_interno: 0,
+        exento_interno: 0,
+        exento_importacion: 0,
+        compras_sujeto_excluido: 200,
+        anticipo_uno_porciento_retenido: 0,
+        gravado_importacion: 0,
+        total: 200,
+      },
+      cuentas: [
+        { // iva credito fiscal
+          id_cuenta: 6,
+          debe: 0,
+          haber: 0
+        }
+        // cuenta contable
+      ],
+    },
+
+
     loading: false,
     loading_navigate: false,
     cuentasList: [],
@@ -166,6 +200,9 @@ export default {
   created() {
     this.getCuentas()
     this.getTipoContribuyentes()
+    if(this.$route.query.show){
+      this.form = this.datoShow
+    }
   },
 
   computed: {
@@ -348,7 +385,7 @@ export default {
         this.form.detalleCompra.gravado_importacion = 0
         this.form.detalleCompra.exento_interno = 0
         this.form.detalleCompra.exento_importacion = 0
-        this.form.detalleCompra.compras_sujeto_excluido = 0
+        // this.form.detalleCompra.compras_sujeto_excluido = 0
         this.form.persona.nrc = null
         // bloquear los campos
         this.$refs.gravado_interno.disabled = true

@@ -24,9 +24,11 @@
               </v-chip>
             </template>
             <template v-slot:[`item.accion`]="{ item }">
-              <v-btn icon small :to="`/compras/${item.id}/edit`">
-                <v-icon>mdi-pencil</v-icon>
+
+              <v-btn icon small :to="`/compras/crear?show=true`">
+                <v-icon>mdi-eye</v-icon>
               </v-btn>
+
               <v-btn icon small @click="deleteCompra(item.id)">
                 <v-icon>mdi-delete</v-icon>
               </v-btn>
@@ -120,7 +122,7 @@ export default {
 
       { text: "Accion", value: "accion", sortable: false, width: "100" },
     ],
-    data: [{ "fecha": "21/11/2023", ee: "Inventario" ,"Persona": { "nombre": "Carlos Sánchez" }, "descripcion": "Compra de Velas", "numero_documento": "002", "Cuenta": { "nombre": "Banco" }, "gravadas_internas": 200, "gravadas_importacion": 0, "exentas_internas": 0, "exentas_internacion": 0, "exentas_importacion": 0, "sujeto_excluido": 200 }],
+    data: [{ "fecha": "21/11/2023", ee: "Mantenimiento de equipos" ,"Persona": { "nombre": "Carlos Sánchez" }, "descripcion": "Compra de Velas", "numero_documento": "002", "Cuenta": { "nombre": "Banco" }, "gravadas_internas": 200, "gravadas_importacion": 0, "exentas_internas": 0, "exentas_internacion": 0, "exentas_importacion": 0, "sujeto_excluido": 200 }],
     page: 1,
     per_page: 10,
     total_rows: 0,

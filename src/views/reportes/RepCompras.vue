@@ -7,17 +7,11 @@
 
       <!-- // filtros de busqueda, por Fecha solo mes -->
       <v-card class="mt-6">
-        <v-card-title style="width: 290px;" >
+        <v-card-title style="width: 290px;">
           <v-menu offset-y ref="menu" transition="scale-transition" :close-on-content-click="false" max-width="290px">
             <template v-slot:activator="{ on, attrs }">
-              <v-text-field
-                v-model="search"
-                append-icon="mdi-calendar"
-                label="Buscar por fecha"
-                v-bind="attrs"
-                v-on="on"
-                max-width="290px"
-              ></v-text-field>
+              <v-text-field v-model="search" append-icon="mdi-calendar" label="Buscar por fecha" v-bind="attrs" v-on="on"
+                max-width="290px"></v-text-field>
             </template>
             <v-date-picker v-model="search" type="month" @input="$refs.menu.save(search)"></v-date-picker>
           </v-menu>
@@ -69,22 +63,59 @@
           <template v-slot:no-data>
             <v-btn color="primary" @click="initialize">No hay Información. Presione para recargar</v-btn>
           </template>
-          <template v-slot:footer>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>{{ totalExentasInternas }}</td>
-            <td>{{ totalExentasExportacion }}</td>
-            <td>{{ totalGravaInternas }}</td>
-            <td>{{ totalGravaImportacion }}</td>
-            <td>{{ totalCreditoFiscal }}</td>
-            <td>{{ totalAnticipoCuentaIvaPercibido }}</td>
-            <td>{{ totalComprasSujetoExcluido }}</td>
-            <td>{{ totalTotalCompras }}</td>
-          </template>
         </v-data-table>
+
+        Resumen
+        <div class="d-flex">
+          <v-list-item three-line>
+            <v-list-item-content>
+              <v-list-item-title>Total Exentas Internas</v-list-item-title>
+              <v-list-item-subtitle>{{ totalExentasInternas }}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item three-line>
+            <v-list-item-content>
+              <v-list-item-title>Total Exentas Exportación</v-list-item-title>
+              <v-list-item-subtitle>{{ totalExentasExportacion }}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item three-line>
+            <v-list-item-content>
+              <v-list-item-title>Total Grava Internas</v-list-item-title>
+              <v-list-item-subtitle>{{ totalGravaInternas }}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item three-line>
+            <v-list-item-content>
+              <v-list-item-title>Total Grava Importación</v-list-item-title>
+              <v-list-item-subtitle>{{ totalGravaImportacion }}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item three-line>
+            <v-list-item-content>
+              <v-list-item-title>Total Credito Fiscal</v-list-item-title>
+              <v-list-item-subtitle>{{ totalCreditoFiscal }}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item three-line>
+            <v-list-item-content>
+              <v-list-item-title>Total Anticipo Cuenta Iva Percibido</v-list-item-title>
+              <v-list-item-subtitle>{{ totalAnticipoCuentaIvaPercibido }}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item three-line>
+            <v-list-item-content>
+              <v-list-item-title>Total Compras Sujeto Excluido</v-list-item-title>
+              <v-list-item-subtitle>{{ totalComprasSujetoExcluido }}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item three-line>
+            <v-list-item-content>
+              <v-list-item-title>Total Total Compras</v-list-item-title>
+              <v-list-item-subtitle>{{ totalTotalCompras }}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </div>
       </v-card>
     </main>
   </v-container>
@@ -115,6 +146,83 @@ export default {
       { text: 'compras a sujeto excluido', value: 'comprasSujetoExcluido' },
       { text: 'total de compras', value: 'totalCompras' },
     ],
-  })
+
+    items: [
+      {
+        numero: 1,
+        fecha: '01/01/2023',
+        numeroDocumento: 'DOC001',
+        nrc: 'NRC001',
+        nit: 'NIT001',
+        proveedor: 'Proveedor A',
+        exentasInternas: 100,
+        exentasExportacion: 50,
+        gravaInternas: 200,
+        gravaImportacion: 150,
+        creditoFiscal: 300,
+        anticipoCuentaIvaPercibido: 20,
+        comprasSujetoExcluido: 10,
+        totalCompras: 830,
+      },
+      {
+        numero: 2,
+        fecha: '05/01/2023',
+        numeroDocumento: 'DOC002',
+        nrc: 'NRC002',
+        nit: 'NIT002',
+        proveedor: 'Proveedor B',
+        exentasInternas: 120,
+        exentasExportacion: 30,
+        gravaInternas: 180,
+        gravaImportacion: 90,
+        creditoFiscal: 250,
+        anticipoCuentaIvaPercibido: 15,
+        comprasSujetoExcluido: 15,
+        totalCompras: 710,
+      },
+      {
+        numero: 3,
+        fecha: '10/01/2023',
+        numeroDocumento: 'DOC003',
+        nrc: 'NRC003',
+        nit: 'NIT003',
+        proveedor: 'Proveedor C',
+        exentasInternas: 80,
+        exentasExportacion: 20,
+        gravaInternas: 150,
+        gravaImportacion: 120,
+        creditoFiscal: 200,
+        anticipoCuentaIvaPercibido: 25,
+        comprasSujetoExcluido: 20,
+        totalCompras: 615,
+      },
+    ],
+  }),
+  computed: {
+    totalExentasInternas() {
+      return this.items.reduce((acc, item) => acc + item.exentasInternas, 0)
+    },
+    totalExentasExportacion() {
+      return this.items.reduce((acc, item) => acc + item.exentasExportacion, 0)
+    },
+    totalGravaInternas() {
+      return this.items.reduce((acc, item) => acc + item.gravaInternas, 0)
+    },
+    totalGravaImportacion() {
+      return this.items.reduce((acc, item) => acc + item.gravaImportacion, 0)
+    },
+    totalCreditoFiscal() {
+      return this.items.reduce((acc, item) => acc + item.creditoFiscal, 0)
+    },
+    totalAnticipoCuentaIvaPercibido() {
+      return this.items.reduce((acc, item) => acc + item.anticipoCuentaIvaPercibido, 0)
+    },
+    totalComprasSujetoExcluido() {
+      return this.items.reduce((acc, item) => acc + item.comprasSujetoExcluido, 0)
+    },
+    totalTotalCompras() {
+      return this.items.reduce((acc, item) => acc + item.totalCompras, 0)
+    },
+  },
 };
 </script>
