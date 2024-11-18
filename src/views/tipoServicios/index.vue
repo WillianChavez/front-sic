@@ -4,12 +4,6 @@
       <v-card class="pa-4" rounded="lg">
         <v-card-title primary-title class="d-flex justify-space-between blueGrayPrincipal--text">
           Tipo de Servicios
-          <div>
-            <v-btn rounded color="bluePrincipal" class="white--text ma-1" @click="store">
-              <v-icon left>mdi-plus</v-icon>
-              Agregar
-            </v-btn>
-          </div>
         </v-card-title>
         <v-card-text>
           <v-skeleton-loader v-if="loading"></v-skeleton-loader>
@@ -41,36 +35,12 @@
               <p>Total registros {{ total_rows }}</p>
             </v-col>
             <v-col>
-              <v-pagination v-model="page" @input="getServicios" :length="totalPages"></v-pagination>
+              <v-pagination v-model="page" @input="getTiposServicios" :length="totalPages"></v-pagination>
             </v-col>
           </v-row>
         </v-card-text>
       </v-card>
     </v-flex>
-
-    <!-- Modal para editar y crear -->
-    <v-dialog v-model="modal" max-width="500px">
-      <v-card>
-        <v-card-title class="bluePrincipal--text">
-          <span class="text-h5">{{ modalTitle }}</span>
-        </v-card-title>
-        <v-card-text>
-          <v-form @submit.prevent="save()">
-            <v-text-field v-model="form.nombre" label="Nombre" :error-messages="nombreErrors"
-              @blur="$v.form.nombre.$touch()" required></v-text-field>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="bluePrincipal" text @click="modal = false">Cancelar</v-btn>
-              <v-btn color="bluePrincipal" text @click="editMode ? update() : save()">{{ editMode ? 'Actualizar'
-              : 'Guardar' }}</v-btn>
-            </v-card-actions>
-          </v-form>
-        </v-card-text>
-      </v-card>
-    </v-dialog>
-
-
-
   </v-container>
 </template>
 <script>
@@ -93,7 +63,6 @@ export default {
         align: "start",
         value: "nombre",
       },
-      { text: "Accion", value: "accion", sortable: false, width: "100" },
     ],
     page: 1,
     per_page: 10,
@@ -116,90 +85,14 @@ export default {
 
   methods: {
     ...mapActions("utils", ["getMenu"]),
-    async getServicios() {
+
+    async getTiposServicios() {
       this.loading = true;
-      const response = await this.services.servicios.getTipoServicios({
-        page: this.page,
-        per_page: this.per_page
-      })
-      const { page, per_page, total_rows } = this.getPaginationProperties(response)
-      this.servicios = response.data;
-      this.page = page;
-      this.per_page = per_page;
-      this.total_rows = total_rows;
+      const response = await this.services.tiposervicio.getAll()
+      console.log(response)
+      this.tiposServicios = response.data;
       this.loading = false;
     },
-    async deleteCuenta(id) {
-      const response = await this.services.servicios.deleteTipoServicio(id)
-      if (response.status === 200) {
-        this.temporalAlert({
-          show: true,
-          message: 'Cuenta eliminada con éxito',
-          type: "success",
-        });
-        this.getServicios()
-      }
-    },
-
-    async store() {
-      this.modalTitle = "Agregar cuenta"
-      this.modal = true
-      this.editMode = false
-      this.cleanForm()
-    },
-
-    cleanForm() {
-      this.cleanErrors()
-      this.form = {
-        nombre: null,
-      }
-    },
-
-    cleanErrors() {
-      this.$v.$reset()
-    },
-
-    async save() {
-      this.$v.$touch()
-      if (!this.$v.$invalid) {
-        const response = await this.services.servicios.saveTipoServicio(this.form)
-        if (response.status === 200) {
-          this.temporalAlert({
-            show: true,
-            message: 'Cuenta creada con éxito',
-            type: "success",
-          });
-          this.getServicios()
-          this.modal = false
-        }
-      }
-    },
-
-    async edit(id) {
-      this.modalTitle = "Editar cuenta"
-      const response = await this.services.cuenta.getCuenta(id)
-      this.form = response.data
-      this.modal = true
-      this.editMode = true
-    },
-
-    async update() {
-      this.$v.$touch()
-      if (!this.$v.$invalid) {
-        const { id, ...payload } = this.form
-        const response = await this.services.servicios.updateTipoServicio(id, payload)
-        if (response.status === 200) {
-          this.temporalAlert({
-            show: true,
-            message: 'Cuenta actualizada con éxito',
-            type: "success",
-          });
-          this.getServicios()
-          this.modal = false
-        }
-      }
-    }
-
   },
   computed: {
     totalPages() {
@@ -215,12 +108,11 @@ export default {
   watch: {
     per_page() {
       this.page = 1;
-      this.getServicios()
+      this.getTiposServicios()
     }
   },
-  // async created() {
-  //   this.getServicios()
-  //   this.getTiposServicios()
-  // },
+  async created() {
+    await this.getTiposServicios()
+  },
 };
 </script>

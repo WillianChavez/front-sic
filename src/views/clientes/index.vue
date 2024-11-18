@@ -3,9 +3,9 @@
     <v-flex xs12 sm11 md11 lg10>
       <v-card class="pa-4" rounded="lg">
         <v-card-title primary-title class="d-flex justify-space-between blueGrayPrincipal--text">
-          Servicios
+          Clientes
           <div>
-            <v-btn rounded color="bluePrincipal" class="white--text ma-1" to="servicios/form">
+            <v-btn rounded color="bluePrincipal" class="white--text ma-1" to="clientes/form">
               <v-icon left>mdi-plus</v-icon>
               Agregar
             </v-btn>
@@ -13,7 +13,7 @@
         </v-card-title>
         <v-card-text>
           <v-skeleton-loader v-if="loading"></v-skeleton-loader>
-          <v-data-table :headers="headers" :items="servicios" item-key="id" class="elevation-0 border-1"
+          <v-data-table :headers="headers" :items="clientes" item-key="id" class="elevation-0 border-1"
             no-data-text="No hay datos" no-results-text="No hay resultados" disable-pagination hide-default-footer
             v-else>
             <template v-slot:[`item.mostrar`]="{ item }">
@@ -25,10 +25,10 @@
               </v-chip>
             </template>
             <template v-slot:[`item.accion`]="{ item }">
-              <v-btn icon small :to="`/servicios/form?id=${item.id}`">
+              <v-btn icon small :to="`/clientes/form?id=${item.id}`">
                 <v-icon>mdi-pencil</v-icon>
               </v-btn>
-              <v-btn icon small @click="deleteServicio(item.id)">
+              <v-btn icon small @click="deleteCliente(item.id)">
                 <v-icon>mdi-delete</v-icon>
               </v-btn>
             </template>
@@ -41,7 +41,7 @@
               <p>Total registros {{ total_rows }}</p>
             </v-col>
             <v-col>
-              <v-pagination v-model="page" @input="getServicios" :length="totalPages"></v-pagination>
+              <v-pagination v-model="page" @input="getClientes" :length="totalPages"></v-pagination>
             </v-col>
           </v-row>
         </v-card-text>
@@ -55,7 +55,7 @@ import { mapActions } from "vuex";
 export default {
   data: () => ({
     loading: false,
-    servicios: [],
+    clientes: [],
     headers: [
       {
         text: "Nombre",
@@ -63,26 +63,16 @@ export default {
         value: "nombre",
       },
       {
-        text: "Tipo de Servicio",
+        text: "Documento único de identidad",
         align: "start",
-        value: "TipoServicio.nombre",
+        value: "dui",
       },
       {
-        text: "Precio Base ($)",
+        text: "Correo Electrónico",
         align: "start",
-        value: "precio_base",
+        value: "email",
       },
-      {
-        text: "Costo ($)",
-        align: "start",
-        value: "costo",
-      },
-      {
-        text: "Descripción",
-        align: "start",
-        value: "descripcion",
-      },
-      { text: "Accion", value: "accion", sortable: false, width: "100" },
+      { text: "Acciones", value: "accion", sortable: false, width: "100" },
     ],
 
     page: 1,
@@ -94,26 +84,24 @@ export default {
 
   methods: {
     ...mapActions("utils", ["getMenu"]),
-    async getServicios() {
+    async getClientes() {
       this.loading = true;
-      const response = await this.services.servicio.getServicios({
+      const response = await this.services.cliente.getClientes({
         page: this.page,
         per_page: this.per_page
       })
-      this.servicios = response.data;
+      this.clientes = response.data;
+      this.total_rows = response.data.length
 
 
       this.loading = false;
     },
-    async deleteServicio(id) {
-      const response = await this.services.servicio.deleteServicio(id)
-      if (response.status === 200) {
-        this.temporalAlert({
-          show: true,
-          message: 'Servicio eliminada con éxito',
-          type: "success",
-        });
-        this.getServicios()
+    async deleteCliente(id) {
+      const confirm = window.confirm("¿Está seguro de eliminar este cliente?");
+
+      if(confirm){
+        await this.services.cliente.deleteCliente(id);
+         await this.getClientes();
       }
     },
   },
@@ -125,11 +113,11 @@ export default {
   watch: {
     per_page() {
       this.page = 1;
-      this.getServicios()
+      this.getClientes()
     }
   },
   async created() {
-    this.getServicios()
+    this.getClientes()
   },
 };
 </script>

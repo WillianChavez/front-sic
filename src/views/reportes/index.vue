@@ -1,77 +1,98 @@
 <template>
-  <v-container class="pa-0 pa-sm-2 justify-center d-flex" fill-height fluid>
-    <v-flex xs12 sm11 md11 lg10>
-      <!-- // menu de opciones para ir a ver los reportes, 
-      // se agrega un boton a la par del nombre para ir a la vista de cada reporte -->
+  <v-container>
+    <v-row>
+      <v-col cols="12">
+        <v-card>
+          <v-card-title>
+            <span class="text-h6">Servicios más Solicitados</span>
+          </v-card-title>
+          <v-card-text>
+            <apexchart type="pie" :options="pieOptions" :series="pieData" ref="pie"></apexchart>
+          </v-card-text>
+        </v-card>
+      </v-col>
+      <v-col cols="12">
+        <v-card>
+          <v-card-title>
+            <span class="text-h6">Reporte de Ventas Mensuales</span>
+          </v-card-title>
+          <v-card-text>
+            <apexchart type="bar" :options="chartOptions" :series="chartData" ref="chart"></apexchart>
+          </v-card-text>
+        </v-card>
+      </v-col>
 
-      <!-- listado de reportes -->
-      <!-- Libro de ventas a contribuyentes
-      Libro de ventas a consumidores finales
-      Libro de compras
-      Libro diario
-      Libro mayor -->
-
-    <main>
-      <h1>Reportes Financieros</h1>
-      <h2>Informes de registros</h2>
-      <v-card class="mt-6">
-        <v-list>
-          <v-list-item-group>
-            <v-list-item>
-              <v-list-item-content>
-                <v-list-item-title>Libro de ventas a contribuyentes</v-list-item-title>
-              </v-list-item-content>
-              <v-list-item-action>
-                <v-btn color="primary" text to="/reportes/libro-ventas-contribuyentes">Ver</v-btn>
-              </v-list-item-action>
-            </v-list-item>
-            <v-list-item>
-              <v-list-item-content>
-                <v-list-item-title>Libro de ventas a consumidores finales</v-list-item-title>
-              </v-list-item-content>
-              <v-list-item-action>
-                <v-btn color="primary" text to="/reportes/libro-ventas-consumidores-finales">Ver</v-btn>
-              </v-list-item-action>
-            </v-list-item>
-            <v-list-item>
-              <v-list-item-content>
-                <v-list-item-title>Libro de compras</v-list-item-title>
-              </v-list-item-content>
-              <v-list-item-action>
-                <v-btn color="primary" text to="/reportes/libro-compras">Ver</v-btn>
-              </v-list-item-action>
-            </v-list-item>
-            <v-list-item>
-              <v-list-item-content>
-                <v-list-item-title>Libro diario</v-list-item-title>
-              </v-list-item-content>
-              <v-list-item-action>
-                <v-btn color="primary" text to="/reportes/libro-diario">Ver</v-btn>
-              </v-list-item-action>
-            </v-list-item>
-            <v-list-item>
-              <v-list-item-content>
-                <v-list-item-title>Libro mayor</v-list-item-title>
-              </v-list-item-content>
-              <v-list-item-action>
-                <v-btn color="primary" text to="/reportes/libro-mayor">Ver</v-btn>
-              </v-list-item-action>
-            </v-list-item>
-          </v-list-item-group>
-        </v-list>
-      </v-card>
-
-    </main>
-    </v-flex>
+    </v-row>
   </v-container>
 </template>
+
 <script>
-import { mapActions } from "vuex";
+import VueApexCharts from "vue-apexcharts";
 
 export default {
-  data: () => ({
-    options: [{ value: 10, text: '10' }, { value: 25, text: '25' }, { value: 50, text: '50' }],
-    loading: false,
-  }),
+  components: {
+    apexchart: VueApexCharts,
+  },
+  data() {
+    return {
+      // Opciones para la gráfica de barras
+      chartOptions: {
+        chart: {
+          id: "ventas-mensuales",
+        },
+        xaxis: {
+          categories: [
+          ],
+        },
+        title: {
+          text: "Ventas Mensuales",
+          align: "center",
+        },
+      },
+      chartData: [
+        {
+          name: "Total Ventas",
+          data: [],
+        },
+      ],
+
+      // Opciones para la gráfica de pastel
+      pieOptions: {
+        labels: [],
+        title: {
+          text: "Distribución de Servicios",
+          align: "center",
+        },
+      },
+      pieData: [],
+    };
+  },
+
+  async created() {
+    const response = await this.services.venta.getReporte();
+    const data = response.data;
+
+    this.$refs.chart.updateOptions({
+      xaxis: {
+        categories: Object.keys(data.ventasMensuales),
+      },
+    });
+
+    this.$refs.chart.updateSeries([
+      {
+        data: Object.values(data.ventasMensuales),
+      },
+    ]);
+
+    this.$refs.pie.updateOptions({
+      labels: Object.keys(data.servicios),
+    });
+
+    this.$refs.pie.updateSeries(Object.values(data.servicios));
+
+
+  },
 };
 </script>
+
+<style scoped></style>
