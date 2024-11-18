@@ -11,6 +11,7 @@
     "core-js": "^3.6.5",
     "jwt-decode": "^3.1.2",
     "moment-timezone": "^0.5.33",
+    "serve": "^14.2.4",
     "v-mask": "^2.3.0",
     "vue": "^2.6.11",
     "vue-apexcharts": "^1.6.2",
