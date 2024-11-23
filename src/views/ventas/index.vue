@@ -63,7 +63,7 @@ export default {
     ventas: [],
     headers: [
       {
-        text: "N° Factura",
+        text: "N° venta",
         align: "start",
         value: "numero_factura",
       },
